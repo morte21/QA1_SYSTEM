@@ -1,0 +1,77 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.FixedAssetPC>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Computers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fixed_asset_no)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fixed_asset_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.inventory_found)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.inventory_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.inventory_year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.item_location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pic_path)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FixedAssetPCId">Edit</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComputerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fixed_asset_no)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fixed_asset_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.inventory_found)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.inventory_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.inventory_year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.item_location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pic_path)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

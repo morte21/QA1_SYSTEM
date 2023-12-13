@@ -1,0 +1,51 @@
+﻿@model QA1_SYSTEM.Models.ItemRequest
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="card" style="padding:20px;">
+    <h4>ItemRequest</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.req_date)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.req_date)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.req_qty)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.req_qty)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.reason)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.reason)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.requestor)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.requestor)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.status)
+        </dd>
+    </dl>
+</div>
+

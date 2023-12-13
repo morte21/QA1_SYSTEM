@@ -1,0 +1,48 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.FixedAssetEQP>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.EquipmentMachine)</th>
+            <th>@Html.DisplayNameFor(model => model.fixed_asset_no)</th>
+            <th>@Html.DisplayNameFor(model => model.fixed_asset_date)</th>
+            <th>@Html.DisplayNameFor(model => model.inventory_found)</th>
+            <th>@Html.DisplayNameFor(model => model.inventory_date)</th>
+            <th>@Html.DisplayNameFor(model => model.inventory_year)</th>
+            <th>@Html.DisplayNameFor(model => model.item_location)</th>
+            <th>@Html.DisplayNameFor(model => model.pic_path)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.EquipmentMachine.active_user)</td>
+            <td>@Html.DisplayFor(modelItem => item.fixed_asset_no)</td>
+            <td>@Html.DisplayFor(modelItem => item.fixed_asset_date)</td>
+            <td>@Html.DisplayFor(modelItem => item.inventory_found)</td>
+            <td>@Html.DisplayFor(modelItem => item.inventory_date)</td>
+            <td>@Html.DisplayFor(modelItem => item.inventory_year)</td>
+            <td>@Html.DisplayFor(modelItem => item.item_location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pic_path)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EQPassetId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EQPassetId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EQPassetId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

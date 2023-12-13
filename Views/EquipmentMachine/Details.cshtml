@@ -1,0 +1,70 @@
+﻿@model QA1_SYSTEM.Models.EquipmentMachine
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4>EquipmentMachine</h4>
+
+<div class="card" style="padding:20px;">
+    
+    <div>
+        <div class="col">
+            <a href="@Url.Content("~/equipments/" + Model.path_pic)" target="_blank">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANBJREFUSEvtlWsNwjAURs8UgAPAARLmACygDFAAEpAwHCABFEA+siZN10fapoQE7s9m9zv3vY7G1jXW56OAHtgDy4KsbsAOuLi+dgb6aFEgblzkv4oBnhXixnVScvvhD1CZqkt0BObAJtCvKsAV0CjLNDEzDyQboIi1F+tRfBhFt8CpFmAilrggB0fwDAgUtdCYPpyIfSLqxb0UoLV3I45pmR3K7oFP1HcgvwOgevpGL3S/UqflnamdrmZcdU9dVOOTDUgNRHWTfxsQzL75T/8FgEAoGdn7svAAAAAASUVORK5CYII=" />
+                View Picture
+            </a>
+        </div>
+
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_reg)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_reg)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.equipment_category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.equipment_category)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.part_number)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.part_number)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.machine_type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.machine_type)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.active_user)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.active_user)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.path_pic)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.path_pic)
+        </dd>
+    </dl>
+</div>
+@* <div>
+    <a asp-action="Edit" asp-route-id="@Model?.EQPid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+ *@

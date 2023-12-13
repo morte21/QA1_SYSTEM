@@ -1,0 +1,192 @@
+﻿@model QA1_SYSTEM.Models.Computers
+
+@{
+    ViewData["Title"] = "EditFixedAsset";
+}
+
+
+
+<h4>Computer Fixed Asset Record</h4>
+<hr />
+<div class="card" style="padding-top:20px;">
+    <form asp-action="EditFixedAsset" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <input type="hidden" asp-for="ComputerId" />
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="date_reg" class="control-label"></label>
+                        <input readonly type="date" asp-for="date_reg" class="form-control" />
+                        <span asp-validation-for="date_reg" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="computer_category" class="control-label"></label>
+                        <select readonly required asp-for="computer_category" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Office Computer">Office Computer</option>
+                            <option value="Industrial Computer">Industrial Computer</option>
+                            <option value="Computer Server">Computer Server</option>
+                            <option value="Network Attached Server">Network Attached Server</option>
+                        </select>
+                        <span asp-validation-for="computer_category" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="processor_name" class="control-label"></label>
+                        <input readonly asp-for="processor_name" class="form-control" />
+                        <span asp-validation-for="processor_name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label asp-for="ram_capacity" class="control-label"></label>
+                        <input readonly asp-for="ram_capacity" class="form-control" />
+                        <span asp-validation-for="ram_capacity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="hdd_capacty" class="control-label"></label>
+                        <input readonly asp-for="hdd_capacty" class="form-control" />
+                        <span asp-validation-for="hdd_capacty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="os_installed" class="control-label"></label>
+                        <input readonly asp-for="os_installed" class="form-control" />
+                        <span asp-validation-for="os_installed" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="ip_sdp" class="control-label"></label>
+                        <input readonly asp-for="ip_sdp" class="form-control"  />
+                        <span asp-validation-for="ip_sdp" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ip_local" class="control-label"></label>
+                        <input readonly asp-for="ip_local" class="form-control" />
+                        <span asp-validation-for="ip_local" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="active_user" class="control-label"></label>
+                        <input readonly asp-for="active_user" class="form-control" />
+                        <span asp-validation-for="active_user" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div style="padding:10px;">
+            <button type="button" class="btn btn-dark float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Add Data
+            </button>
+        </div>
+    </form>
+
+@* table *@
+    <div class="card" style="padding:15px; margin: 5px;">
+        <h5 class="card-header">Fixed Asset</h5>
+        <hr />
+        <div class="table-responsive text-nowrap">
+            <table id="computers_table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                           FK
+                        </th>
+                        <th>
+                            Fixed Asset Number
+                        </th>
+                        <th>
+                            Fixed Asset Date
+                        </th>
+                        <th>
+                            Found?
+                        </th>
+                        <th>
+                            Inventory Date
+                        </th>
+                        <th>
+                            Inventory Year
+                        </th>
+                        <th>
+                            Location
+                        </th>
+                        <th>
+                            pic
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.FixedAssetPC)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="FixedAssetPC" asp-action="Edit" asp-route-id="@item.FixedAssetPCId">Edit</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Computers.ComputerId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fixed_asset_no)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fixed_asset_date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.inventory_found)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.inventory_date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.inventory_year)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.item_location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.pic_path)
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div style="padding-top:10px;">
+    <a asp-action="IndexFixedAsset">Back to List</a>
+</div>
+
+<!-- Modal from add data-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Fixed Asset Registration</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("~/Views/FixedAssetPC/Create.cshtml", new QA1_SYSTEM.Models.FixedAssetPC { ComputerId = Model.ComputerId });
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

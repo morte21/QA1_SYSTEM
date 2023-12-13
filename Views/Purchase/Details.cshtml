@@ -1,0 +1,181 @@
+﻿@model QA1_SYSTEM.Models.Purchasing
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h4>Purchase details</h4>
+<div class="card" style="padding:20px;">
+    
+    <div >
+        <div class="col">
+            <a href="@Url.Content("~/purchaseOrder/" + Model.po_path)" target="_blank">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANBJREFUSEvtlWsNwjAURs8UgAPAARLmACygDFAAEpAwHCABFEA+siZN10fapoQE7s9m9zv3vY7G1jXW56OAHtgDy4KsbsAOuLi+dgb6aFEgblzkv4oBnhXixnVScvvhD1CZqkt0BObAJtCvKsAV0CjLNDEzDyQboIi1F+tRfBhFt8CpFmAilrggB0fwDAgUtdCYPpyIfSLqxb0UoLV3I45pmR3K7oFP1HcgvwOgevpGL3S/UqflnamdrmZcdU9dVOOTDUgNRHWTfxsQzL75T/8FgEAoGdn7svAAAAAASUVORK5CYII=" />
+                View Purchase Order
+            </a>
+            ||
+            <a href="@Url.Content("~/purchaseRequest/" + Model.pr_path)" target="_blank">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOxJREFUSEvtlv8JwjAQhb9O4gjqBLqBjqAbiAuok+gIuoEruIEuovIghbREL9dY9A8PAoVe3pfLj5dU9BxVz/qkAHNgA4wM+AFYWgNMAa7AwOoY/puQFOCRIa6R73MgXQHqt8iBlABUgAkpBZiQTwDakIZmV8C7ffAHmKfkt6ZIo5EnyZ8UR+AOrAFZiqxCtnKO6nJVoGR13gLT0IbAOBwyQXTYJiUAic+AUwCoIjUJCy5x5dThrqA2v100Rfq+BEVZexwugLllEgnfB3gunHYBmrbGTfjqytSiabd44gaswjqlV9yjlpvb+6viCShKNBln3rfLAAAAAElFTkSuQmCC" />
+                View Request
+            </a>
+        </div>
+
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_request)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_request)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.purchase_dept)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.purchase_dept)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.category)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.part_number)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.part_number)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.item_description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.item_description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.maker)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.maker)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.supplier)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.supplier)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.request_qty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.request_qty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.request_unit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.request_unit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.unit_price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.unit_price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.total_price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.total_price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.item_currency)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.item_currency)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.request_reason)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.request_reason)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.request_status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.request_status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_submitPR)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_submitPR)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.person_submitPR)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.person_submitPR)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.purchase_order)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.purchase_order)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.po_path)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.po_path)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.est_time_arrival)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.est_time_arrival)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_needed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_needed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_received)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_received)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.received_qty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.received_qty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.item_comment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.item_comment)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pr_number)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pr_number)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pr_path)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pr_path)
+        </dd>
+    </dl>
+    <div style="padding-top:20px;">
+        <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+

@@ -1,0 +1,67 @@
+﻿@model QA1_SYSTEM.Models.Requestor
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Fill the required information</h4>
+<hr />
+<div class="card" style="padding:10px;">
+    <form asp-action="Create" asp-controller="Requestor" method="POST">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input readonly hidden asp-for="ConsumbleId" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="request_ate" class="control-label"></label>
+                        <input asp-for="request_ate" class="form-control" />
+                        <span asp-validation-for="request_ate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="part_number" class="control-label"></label>
+                        <input  asp-for="part_number" class="form-control" />
+                        <span asp-validation-for="part_number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="item_description" class="control-label"></label>
+                        <input asp-for="item_description" class="form-control" />
+                        <span asp-validation-for="item_description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label  asp-for="request_qty" class="control-label"></label>
+                        <input type="number" id="request_qty" asp-for="request_qty" class="form-control" />
+                        
+                        <span asp-validation-for="request_qty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="requestor_name" class="control-label"></label>
+                        <input asp-for="requestor_name" class="form-control" />
+                        <span asp-validation-for="requestor_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="reason_request" class="control-label"></label>
+                        <input asp-for="reason_request" class="form-control" />
+                        <span asp-validation-for="reason_request" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" onclick="setRequestQty()" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+   
+}

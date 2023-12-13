@@ -1,0 +1,47 @@
+﻿@model QA1_SYSTEM.Models.ComputerHistory
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Computer History</h4>
+<hr />
+<div class="card" style="padding:10px;">
+    <form asp-action="Create" asp-controller="CompHistory" method="POST">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input hidden asp-for="ComputerId" class="form-control" asp-items="ViewBag.ComputerId" />
+                    <div class="form-group">
+                        <label asp-for="trouble_encounter" class="control-label"></label>
+                        <input asp-for="trouble_encounter" class="form-control"  />
+                        <span asp-validation-for="trouble_encounter" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="trouble_date" class="control-label"></label>
+                        <input type="date" asp-for="trouble_date" class="form-control" />
+                        <span asp-validation-for="trouble_date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="remarks" class="control-label"></label>
+                        <input asp-for="remarks" class="form-control" oninput="capitalizeFirstLetter(this) />
+                        <span asp-validation-for="remarks" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

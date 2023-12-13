@@ -1,0 +1,46 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.EquipmentMachine>
+
+@{
+    ViewData["Title"] = "IndexHistory";
+}
+
+<h1>EQUIPMENT | MACHINE RECORDS</h1>
+
+<div class="card" style="padding:20px;">
+    <hr />
+    <div class="table-responsive text-nowrap">
+
+
+        <table id="equipmachine_table" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@Html.DisplayNameFor(model => model.date_reg)</th>
+                    <th>@Html.DisplayNameFor(model => model.equipment_category)</th>
+                    <th>@Html.DisplayNameFor(model => model.part_number)</th>
+                    <th>@Html.DisplayNameFor(model => model.description)</th>
+                    <th>@Html.DisplayNameFor(model => model.machine_type)</th>
+                    <th>@Html.DisplayNameFor(model => model.active_user)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="EditHistory" asp-route-id="@item.EQPid">View Records</a>
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.date_reg)</td>
+                        <td>@Html.DisplayFor(modelItem => item.equipment_category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.part_number)</td>
+                        <td>@Html.DisplayFor(modelItem => item.description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.machine_type)</td>
+                        <td>@Html.DisplayFor(modelItem => item.active_user)</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.EquipmentMachine>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>EQUIPMENT | MACHINE MASTERLIST</h1>
+
+
+<div>
+    <div class="d-flex justify-content-between">
+        <div>
+            <a asp-action="Create" style="background-color: #007bff; color: #fff; padding: 10px 20px; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#createdmodal">Create New</a>
+        </div>
+    </div>
+</div>
+<div class="card" style="padding:20px;">
+    <hr />
+    <div class="table-responsive text-nowrap">
+
+
+        <table id="equipmachine_table" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@Html.DisplayNameFor(model => model.date_reg)</th>
+                    <th>@Html.DisplayNameFor(model => model.equipment_category)</th>
+                    <th>@Html.DisplayNameFor(model => model.part_number)</th>
+                    <th>@Html.DisplayNameFor(model => model.description)</th>
+                    <th>@Html.DisplayNameFor(model => model.machine_type)</th>
+                    <th>@Html.DisplayNameFor(model => model.active_user)</th>
+                    <th>@Html.DisplayNameFor(model => model.path_pic)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.EQPid" data-bs-toggle="modal" data-bs-target="#editmodal" onclick="loadEditModalEQP(@item.EQPid)">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.EQPid" data-bs-toggle="modal" data-bs-target="#detailmodal" onclick="loadDetailsModalEQP(@item.EQPid)">Details</a>
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.date_reg)</td>
+                        <td>@Html.DisplayFor(modelItem => item.equipment_category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.part_number)</td>
+                        <td>@Html.DisplayFor(modelItem => item.description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.machine_type)</td>
+                        <td>@Html.DisplayFor(modelItem => item.active_user)</td>
+                        <td>@Html.DisplayFor(modelItem => item.path_pic)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal from add data-->
+<div class="modal fade" id="createdmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Registration</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                @{
+
+                    Html.RenderPartial("~/Views/EquipmentMachine/Create.cshtml", new EquipmentMachine());
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal from add data-->
+<div class="modal fade" id="editmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Registration</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("~/Views/EquipmentMachine/Edit.cshtml", new EquipmentMachine());
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal from add data-->
+<div class="modal fade" id="detailmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Update registration</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button> *@
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("~/Views/EquipmentMachine/Details.cshtml", new EquipmentMachine());
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

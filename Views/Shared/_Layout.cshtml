@@ -1,0 +1,473 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>Quality Assurance 1</title>
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="light/css/simplebar.css">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="~/light/css/feather.css">
+    <link rel="stylesheet" href="~/light/css/select2.css">
+    <link rel="stylesheet" href="~/light/css/dropzone.css">
+    <link rel="stylesheet" href="~/light/css/uppy.min.css">
+    <link rel="stylesheet" href="~/light/css/jquery.steps.css">
+    <link rel="stylesheet" href="~/light/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="~/light/css/quill.snow.css">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="~/light/css/daterangepicker.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="~/light/css/app-light.css" id="lightTheme">
+    <link rel="stylesheet" href="~/light/css/app-dark.css" id="darkTheme"  disabled> 
+    <!-- Orig -->
+
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" href="~/css/button-animation.css">
+
+    <link rel="stylesheet" href="~/css/tables.css">
+    <link rel="stylesheet" href="~/css/site.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700">
+
+    @* carousel *@
+    <link rel="stylesheet" type="text/css" href="~/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="~/slick/slick-theme.css" />
+
+    <script src="/js/xlsx.full.min.js"></script> @*use for export*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+    <link src="~/DataTables/DataTables-1.13.8/css/jquery.dataTables.min.css" rel="stylesheet"  />
+    <link src="~/DataTables/Buttons-2.4.2/css/buttons.dataTables.min.css" rel="stylesheet"  />
+    
+</head>
+<body class="vertical  light  ">
+    <div class="wrapper">
+        <nav class="topnav navbar navbar-light">
+            <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+                <i class="fe fe-menu navbar-toggler-icon"></i>
+            </button>
+            <form class="form-inline mr-auto searchform text-muted" onload="consoleText()">
+                <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="search" placeholder="Type something..." aria-label="Search">
+            </form>
+            
+           
+            <ul class="nav">
+                @*login profile here*@
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
+                        <i class="fe fe-sun fe-16"></i>
+                    </a>
+                </li>
+                @* <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
+                        <span class="fe fe-grid fe-16"></span>
+                    </a>
+                </li>
+                <li class="nav-item nav-notif">
+                    <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
+                        <span class="fe fe-bell fe-16"></span>
+                        <span class="dot dot-md bg-success"></span>
+                    </a>
+                </li> *@
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="avatar avatar-sm mt-2">
+                            <img src="/images/batman.png" alt="..." class="avatar-img rounded-circle">
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </li>
+               
+            </ul>
+            
+        </nav>
+        
+        <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
+            <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
+                <i class="fe fe-x"><span class="sr-only"></span></i>
+            </a>
+            <nav class="vertnav navbar navbar-light">
+                <!-- nav bar -->
+                <div class="w-100 mb-4 d-flex">
+                    <a class="navbar-brand mx-auto mt-2 flex-fill text-center" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="/images/img-logo.png" style="width:70%;" >
+                    </a>
+                </div>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                   @*  <li class="nav-item dropdown">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-home fe-16"></i>
+                            <span class="ml-3 item-text">Dashboard</span><span class="sr-only">(current)</span>
+                        </a>
+                    </li> *@
+
+                    <li class="nav-item dropdown">
+                        <a href="#forms1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-credit-card fe-16"></i>
+                            <span class="ml-3 item-text">Dashboard</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="forms1">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="Home" asp-action="Consumables"><span class="ml-1 item-text">Consumables</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="Home" asp-action="Purchase"><span class="ml-1 item-text">Purchase</span></a>
+                            </li>
+                            @* <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="Home" asp-action="Index"><span class="ml-1 item-text">Equipment/Machine</span></a>
+                            </li> *@
+                        </ul>
+                    </li>
+                   
+                </ul>
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Request</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link" asp-area="" asp-controller="ItemRequest" asp-action="Index">
+                            <i class="fe fe-dollar-sign fe-16"></i>
+                            <span class="ml-3 item-text" title="Request to purchase">Purchase Request[User]</span>
+
+                        </a>
+                    </li>
+                    <li class="nav-item w-100">
+                        <a class="nav-link" asp-area="" asp-controller="Consumables" asp-action="RequestorIndex">
+                            <i class="fe fe-folder-plus fe-16"></i>
+                            <span class="ml-3 item-text" title="Request consumable item">Item Request</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Records</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item dropdown">
+                        <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-credit-card fe-16"></i>
+                            <span class="ml-3 item-text">Masterlist</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="forms">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="Consumables" asp-action="Index"><span class="ml-1 item-text">Office/Machine Parts</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="Computers" asp-action="Index"><span class="ml-1 item-text">Computers</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="EquipmentMachine" asp-action="Index"><span class="ml-1 item-text">Equipment/Machine</span></a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+
+
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Monitoring</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link" asp-area="" asp-controller="Purchase" asp-action="Index">
+                            <i class="fe fe-layers fe-16"></i>
+                            <span class="ml-3 item-text">Purchase Monitoring</span>
+
+                        </a>
+                    </li>
+                </ul>
+
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>History and Assets</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item dropdown">
+                        <a href="#history" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-folder fe-16"></i>
+                            <span class="ml-3 item-text">Equipment/PC Records</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="history">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="Computers" asp-action="IndexHistory"><span class="ml-1 item-text">Computer</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="EquipmentMachine" asp-action="IndexHistory"><span class="ml-1 item-text">Equipment/Machine</span></a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#asset" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-book-open fe-16"></i>
+                            <span class="ml-3 item-text">Equipment/PC Asset</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="asset">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="Computers" asp-action="IndexFixedAsset"><span class="ml-1 item-text">Computer</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" asp-area="" asp-controller="EquipmentMachine" asp-action="IndexFixedAsset"><span class="ml-1 item-text">Equipment/Machine</span></a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+                @* <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Apps</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link" href="calendar.html">
+                            <i class="fe fe-calendar fe-16"></i>
+                            <span class="ml-3 item-text">Calendar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#contact" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-book fe-16"></i>
+                            <span class="ml-3 item-text">Contacts</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                            <li><a class="nav-link pl-3" href="./contacts-list.html"><span class="ml-1">Contact List</span></a></li>
+                            <li><a class="nav-link pl-3" href="./contacts-grid.html"><span class="ml-1">Contact Grid</span></a></li>
+                            <li><a class="nav-link pl-3" href="./contacts-new.html"><span class="ml-1">New Contact</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#profile" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-user fe-16"></i>
+                            <span class="ml-3 item-text">Profile</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="profile">
+                            <li><a class="nav-link pl-3" href="./profile.html"><span class="ml-1">Overview</span></a></li>
+                          
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#fileman" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-folder fe-16"></i>
+                            <span class="ml-3 item-text">File Manager</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="fileman">
+                            <li><a class="nav-link pl-3" href="./files-list.html"><span class="ml-1">Files List</span></a></li>
+                            <li> <a class="nav-link pl-3" href="./files-grid.html"><span class="ml-1">Files Grid</span></a></li>
+                           
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#support" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-compass fe-16"></i>
+                            <span class="ml-3 item-text">Help Desk</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="support">
+                            <li>
+                                <a class="nav-link pl-3" href="./support-center.html"><span class="ml-1">Home</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Extra</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item dropdown">
+                        <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-file fe-16"></i>
+                            <span class="ml-3 item-text">Pages</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100 w-100" id="pages">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-orders.html">
+                                    <span class="ml-1 item-text">Orders</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-timeline.html">
+                                    <span class="ml-1 item-text">Timeline</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-invoice.html">
+                                    <span class="ml-1 item-text">Invoice</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-404.html">
+                                    <span class="ml-1 item-text">Page 404</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-500.html">
+                                    <span class="ml-1 item-text">Page 500</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./page-blank.html">
+                                    <span class="ml-1 item-text">Blank</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#auth" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-shield fe-16"></i>
+                            <span class="ml-3 item-text">Authentication</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="auth">
+                            <li><a class="nav-link pl-3" href="./auth-login.html"><span class="ml-1">Login 1</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#layouts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-layout fe-16"></i>
+                            <span class="ml-3 item-text">Layout</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="layouts">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./index.html"><span class="ml-1 item-text">Default</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./index-horizontal.html"><span class="ml-1 item-text">Top Navigation</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="./index-boxed.html"><span class="ml-1 item-text">Boxed</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul> *@
+                <p class="text-muted nav-heading mt-4 mb-1">
+                    <span>Settings</span>
+                </p>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <a class="nav-link" asp-area="" asp-controller="AppRoles" asp-action="Index">
+                        <i class="fe fe-layers fe-16"></i>
+                        <span class="ml-3 item-text">Roles</span>
+
+                    </a>
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
+                        <i class="fe fe-layers fe-16"></i>
+                        <span class="ml-3 item-text">User Authentication</span>
+
+                    </a>
+                    <li class="nav-item dropdown">
+                        <a href="#contact" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link" >
+                            <i class="fe fe-book fe-16"></i>
+                            <span class="ml-3 item-text">Group</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" ><span class="ml-1 item-text">QA1-P</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" ><span class="ml-1 item-text">QA1-QE</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" ><span class="ml-1 item-text">QA1-I</span></a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+               
+            </nav>
+        </aside>
+        <main role="main" class="main-content">
+            @RenderBody()
+            @*@RenderSection("Scripts", required: false)*@
+
+
+        </main> <!-- main -->
+    </div> <!-- .wrapper -->
+    <script src="/light/js/jquery.min.js"></script>
+    <script src="/light/js/popper.min.js"></script>
+    <script src="/light/js/moment.min.js"></script>
+    <script src="/light/js/bootstrap.min.js"></script>
+    <script src="/light/js/simplebar.min.js"></script>
+    <script src='/light/js/daterangepicker.js'></script>
+    <script src='/light/js/jquery.stickOnScroll.js'></script>
+    <script src="/light/js/tinycolor-min.js"></script>
+    <script src="/light/js/config.js"></script>
+    <script src="/light/js/d3.min.js"></script>
+    <script src="/light/js/topojson.min.js"></script>
+    <script src="/light/js/datamaps.all.min.js"></script>
+    <script src="/light/js/datamaps-zoomto.js"></script>
+    <script src="/light/js/datamaps.custom.js"></script>
+    <script src="/light/js/Chart.min.js"></script>
+    @* <script>
+        /* defind global options */
+        Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
+        Chart.defaults.global.defaultFontColor = colors.mutedColor;
+    </script> *@
+    <script src="/light/js/gauge.min.js"></script>
+    <script src="/light/js/jquery.sparkline.min.js"></script>
+    <script src="/light/js/apexcharts.min.js"></script>
+    <script src="/light/js/apexcharts.custom.js"></script>
+    <script src='/light/js/jquery.mask.min.js'></script>
+    <script src='/light/js/select2.min.js'></script>
+    <script src='/light/js/jquery.steps.min.js'></script>
+    <script src='/light/js/jquery.validate.min.js'></script>
+    <script src='/light/js/jquery.timepicker.js'></script>
+    <script src='/light/js/dropzone.min.js'></script>
+    <script src='/light/js/uppy.min.js'></script>
+    <script src='/light/js/quill.min.js'></script>
+    
+    <script src="/light/js/apps.js"></script>
+
+    <!-- Original File -->
+    <script src="/js/purchase.js"></script>
+    <script src="/js/consumables.js"></script>
+    <script src="/js/datatabless.js"></script>
+    <script src="/js/computers.js"></script>
+    <script src="/js/charts.js"></script>
+    
+    <script src="/js/3d.js"></script>
+    <script src="/js/exportToExcel.js"></script>
+    <script src="/js/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.1.1/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="/slick/slick.min.js"></script>
+    <script type="text/javascript" src="/js/slick-carousel.js"></script>
+
+    <script type="text/javascript" src="/js/d3chart.js"></script>
+
+    <script src="~/lib/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
+    <script src="/DataTables/Buttons-2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="/DataTables/Buttons-2.4.2/js/buttons.html5.min.js"></script>
+    <script src="/DataTables/Buttons-2.4.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="/DataTables/Buttons-2.4.2/js/buttons.dataTables.min.js"></script>
+    <script src="/DataTables/JSZip-3.10.1/jszip.min.js"></script>
+    <script src="/DataTables/pdfmake-0.2.7/pdfmake.min.js"></script>
+    <script src="/DataTables/pdfmake-0.2.7/vfs_fonts.js"></script>
+    
+
+   @*  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script> *@
+    @* <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-56159088-1');
+    </script> *@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

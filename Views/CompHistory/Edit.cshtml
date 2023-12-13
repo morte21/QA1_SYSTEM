@@ -1,0 +1,56 @@
+﻿@model QA1_SYSTEM.Models.ComputerHistory
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Computer History</h4>
+<hr />
+
+<div class="card" style="padding:20px; width:70%;">
+    <form asp-action="Edit">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input hidden asp-for="CompHistoryId" />
+                    <input readonly hidden asp-for="ComputerId" class="form-control" />
+                    <div class="form-group">
+                        <label asp-for="trouble_encounter" class="control-label"></label>
+                        <input asp-for="trouble_encounter" class="form-control" />
+                        <span asp-validation-for="trouble_encounter" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="trouble_date" class="control-label"></label>
+                        <input type="date" asp-for="trouble_date" class="form-control" />
+                        <span asp-validation-for="trouble_date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="remarks" class="control-label"></label>
+                        <input asp-for="remarks" class="form-control" />
+                        <span asp-validation-for="remarks" class="text-danger"></span>
+                    </div>
+                    
+
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+    <div style="padding-top:30px;">
+        <a asp-controller="Computers" asp-action="EditHistory" asp-route-id="@Model.ComputerId">Back to List</a>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

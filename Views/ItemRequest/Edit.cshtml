@@ -1,0 +1,75 @@
+﻿@model QA1_SYSTEM.Models.ItemRequest
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Purchase Request Update</h4>
+<hr />
+<div class="card" style="padding:20px;">
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="id" />
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="status" class="control-label"></label>
+                        <select asp-for="status" class="form-control">
+                            <option value="">Select</option>
+                            <option value="FOR APPROVAL">FOR APPROVAL</option>
+                            <option value="PROCESSING REQUEST">PROCESSING REQUEST</option>
+                            <option value="REQUEST DENIED">REQUEST DENIED</option>
+                        </select>
+                        <span asp-validation-for="status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="req_date" class="control-label"></label>
+                        <input required type="date" asp-for="req_date" class="form-control" />
+                        <span asp-validation-for="req_date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="description" class="control-label"></label>
+                        <textarea required asp-for="description" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="req_qty" class="control-label"></label>
+                        <input required type="number" asp-for="req_qty" class="form-control" />
+                        <span asp-validation-for="req_qty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="reason" class="control-label"></label>
+                        <textarea required asp-for="reason" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="reason" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="requestor" class="control-label"></label>
+                        <input required asp-for="requestor" class="form-control" />
+                        <span asp-validation-for="requestor" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+                <div class="col-md-12" style="padding-top:20px;">
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

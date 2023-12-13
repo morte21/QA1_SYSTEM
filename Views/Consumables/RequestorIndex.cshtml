@@ -1,0 +1,65 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.Consumables>
+
+@{
+    ViewData["Title"] = "RequestorIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Consumables</h1> 
+
+
+<div class="card" style="padding:20px;">
+    <hr />
+    <div class="table-responsive text-nowrap">
+        <table id="requestor_table" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@Html.DisplayNameFor(model => model.date_reg)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_category)</th>
+                    <th>@Html.DisplayNameFor(model => model.part_number)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_description)</th>
+                    <th>@Html.DisplayNameFor(model => model.maker)</th>
+                    <th>@Html.DisplayNameFor(model => model.supplier)</th>
+                    <th>@Html.DisplayNameFor(model => model.total_qty)</th>
+                    <th>@Html.DisplayNameFor(model => model.consum_qty)</th>
+                    <th>@Html.DisplayNameFor(model => model.safety_qty)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_unit)</th>
+                    <th>@Html.DisplayNameFor(model => model.unit_price)</th>
+                    <th>@Html.DisplayNameFor(model => model.currency)</th>
+                    <th>@Html.DisplayNameFor(model => model.total_price)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_remarks)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_picture)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Consumables" asp-action="EditRequest" asp-route-id="@item.ConsumbleId">Item Request</a>
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.date_reg)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.part_number)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.maker)</td>
+                        <td>@Html.DisplayFor(modelItem => item.supplier)</td>
+                        <td>@Html.DisplayFor(modelItem => item.total_qty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.consum_qty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.safety_qty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_unit)</td>
+                        <td>@Html.DisplayFor(modelItem => item.unit_price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.currency)</td>
+                        <td>@Html.DisplayFor(modelItem => item.total_price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_remarks)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_picture)</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+

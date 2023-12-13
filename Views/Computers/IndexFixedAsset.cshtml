@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.Computers>
+
+@{
+    ViewData["Title"] = "IndexFixedAsset";
+}
+
+
+<h1>COMPUTER FIXED ASSET</h1>
+
+
+<div class="card" style="padding:20px;">
+    <hr />
+    <div class="table-responsive text-nowrap">
+        <table id="computers_table" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@Html.DisplayNameFor(model => model.date_reg)</th>
+                    <th>@Html.DisplayNameFor(model => model.computer_category)</th>
+                    <th>@Html.DisplayNameFor(model => model.processor_name)</th>
+                    <th>@Html.DisplayNameFor(model => model.ram_capacity)</th>
+                    <th>@Html.DisplayNameFor(model => model.hdd_capacty)</th>
+                    <th>@Html.DisplayNameFor(model => model.os_installed)</th>
+                    <th>@Html.DisplayNameFor(model => model.ip_sdp)</th>
+                    <th>@Html.DisplayNameFor(model => model.ip_local)</th>
+                    <th>@Html.DisplayNameFor(model => model.active_user)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="EditFixedAsset" asp-route-id="@item.ComputerId">View Fixed Asset</a>
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.date_reg)</td>
+                        <td>@Html.DisplayFor(modelItem => item.computer_category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.processor_name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ram_capacity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.hdd_capacty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.os_installed)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ip_sdp)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ip_local)</td>
+                        <td>@Html.DisplayFor(modelItem => item.active_user)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

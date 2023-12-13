@@ -1,0 +1,201 @@
+﻿@model QA1_SYSTEM.Models.Purchasing
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4>Update request details </h4>
+<hr />
+<div class="card" style="padding:20px;">
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="id" />
+                <div class="col-md-3 d-flex flex-column">
+                    <div class="form-group">
+                        <label asp-for="date_request" class="control-label"></label>
+                        <input type="date" asp-for="date_request" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="purchase_dept" class="control-label"></label>
+                        <select  asp-for="purchase_dept" class="form-control">
+                            <option value="">Select</option>
+                            <option value="MP">MP</option>
+                            <option value="PGA">PGA</option>
+                            <option value="SDC">SDC</option>
+                        </select>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="category" class="control-label"></label>
+                        <select  asp-for="category" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Capital_Investment">Capital_Investment</option>
+                            <option value="Projects">Projects</option>
+                            <option value="AIE">AIE</option>
+                            <option value="Consumables">Consumables</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="part_number" class="control-label"></label>
+                        <input asp-for="part_number" class="form-control" />
+                       
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="item_description" class="control-label"></label>
+                        <textarea asp-for="item_description" class="form-control" rows="2"></textarea>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="maker" class="control-label"></label>
+                        <input asp-for="maker" class="form-control" />
+                        
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex flex-column">
+                    <div class="form-group">
+                        <label asp-for="supplier" class="control-label"></label>
+                        <textarea asp-for="supplier" class="form-control" rows="2"></textarea>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="request_qty" class="control-label"></label>
+                        <input id="request_qty" asp-for="request_qty" oninput="calculateTotal()" class="form-control"/>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="request_unit" class="control-label"></label>
+                        <select  asp-for="request_unit" class="form-control">
+                            <option value="">Select</option>
+                            <option value="PC(S)">PC(S)</option>
+                            <option value="PACK">PACK</option>
+                            <option value="BOX">BOX</option>
+                        </select>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="unit_price" class="control-label"></label>
+                        <input id="unit_price" asp-for="unit_price" oninput="calculateTotal()" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="total_price" class="control-label"></label>
+                        <input readonly id="total_price" asp-for="total_price" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="item_currency" class="control-label"></label>
+                        <select  asp-for="item_currency" class="form-control">
+                            <option value="">Select</option>
+                            <option value="USD">USD</option>
+                            <option value="PHP">PHP</option>
+                            <option value="JPY">JPY</option>
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex flex-column">
+                    <div class="form-group">
+                        <label asp-for="request_reason" class="control-label"></label>
+                        <textarea asp-for="request_reason" class="form-control" rows="2"></textarea>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="request_status" class="control-label"></label>
+
+                        <select  asp-for="request_status" class="form-control">
+                            <option value="">Select</option>
+                            <option value="FOR APPROVAL">FOR APPROVAL</option>
+                            <option value="WAITING FOR ARRIVAL">WAITING FOR ARRIVAL</option>
+                            <option value="ITEM RECEIVED">ITEM RECEIVED"</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                        </select>
+                       
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="date_submitPR" class="control-label"></label>
+                        <input type="date" asp-for="date_submitPR" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="person_submitPR" class="control-label"></label>
+                        <input asp-for="person_submitPR" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="purchase_order" class="control-label"></label>
+                        <input asp-for="purchase_order" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="est_time_arrival" class="control-label"></label>
+                        <input asp-for="est_time_arrival" class="form-control" />
+                        
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex flex-column">
+                    
+                    <div class="form-group">
+                        <label asp-for="date_needed" class="control-label"></label>
+                        <input type="date" asp-for="date_needed" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="date_received" class="control-label"></label>
+                        <input type="date" asp-for="date_received" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="received_qty" class="control-label"></label>
+                        <input asp-for="received_qty" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="item_comment" class="control-label"></label>
+                        <textarea asp-for="item_comment" class="form-control" rows="2"></textarea>
+                        
+                    </div>
+                    <div class="form-group" >
+                        <label asp-for="pr_number" class="control-label"></label>
+                        <input asp-for="pr_number" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="_pathDoc">Upload Purchase Order</label>
+                        <input type="file" id="_pathDoc" name="_pathDoc" class="form-control-file" accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp" />
+                        <input readonly hidden asp-for="po_path" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="_pathDoc2">Upload Purchase Request</label>
+                        <input type="file" id="_pathDoc2" name="_pathDoc2" class="form-control-file" accept=".pdf" />
+                        <input readonly hidden asp-for="pr_path" class="form-control" />
+                    </div>
+                </div>
+                
+                <div class="col-md-12" style="padding-top:20px;">
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+   
+    
+}

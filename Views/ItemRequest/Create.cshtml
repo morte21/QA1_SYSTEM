@@ -1,0 +1,70 @@
+﻿@model QA1_SYSTEM.Models.ItemRequest
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Create";
+}
+@inject UserManager<IdentityUser> UserManager
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="d-flex justify-content-between" style="padding:5px;">
+        <div>
+            <h4>Create new request</h4>
+        </div>
+        <div>
+            <input type="submit" value="Create" class="btn btn-primary" style="width:100px" />
+        </div>
+    </div>
+    <hr />
+    <div class="card" style="padding:10px;">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input hidden readonly asp-for="status" class="form-control" value="FOR APPROVAL" />
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="req_date" class="control-label"></label>
+                        <input required type="date" asp-for="req_date" class="form-control" />
+                        <span asp-validation-for="req_date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="description" class="control-label"></label>
+                        <textarea required asp-for="description" class="form-control" rows="4" onblur="capitalizeFirstLetter(this)"></textarea>
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="req_qty" class="control-label"></label>
+                        <input required type="number" asp-for="req_qty" class="form-control" />
+                        <span asp-validation-for="req_qty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="reason" class="control-label"></label>
+                        <textarea required asp-for="reason" class="form-control" rows="4" onblur="capitalizeFirstLetter(this)"></textarea>
+                        <span asp-validation-for="reason" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input readonly asp-for="requestor" class="form-control" value="@UserManager.GetUserName(User)" />
+                        <span asp-validation-for="requestor" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script>
+            function capitalizeFirstLetter(element) {
+                const value = element.value.trim();
+                if (value !== '') {
+                    const capitalized = value.charAt(0).toUpperCase() + value.slice(1);
+                    element.value = capitalized;
+                }
+            }
+        </script>
+    }
+}

@@ -1,0 +1,154 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.Consumables>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Consumables</h1>
+
+<div>
+    <div class="d-flex justify-content-between">
+        <div>
+            <a asp-action="Create" style="background-color: #007bff; color: #fff; padding: 10px 20px; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#createmodal">Create New</a>
+        </div>
+    </div>
+</div>
+<div class="card" style="padding:20px;">
+    <hr />
+    <div class="table-responsive text-nowrap" >
+        <table id="consumable_table" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th hidden>@Html.DisplayNameFor(model => model.date_reg)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_category)</th>
+                    <th>@Html.DisplayNameFor(model => model.part_number)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_description)</th>
+                    <th>@Html.DisplayNameFor(model => model.maker)</th>
+                    <th>@Html.DisplayNameFor(model => model.supplier)</th>
+                    <th>@Html.DisplayNameFor(model => model.total_qty)</th>
+                    <th>@Html.DisplayNameFor(model => model.consum_qty)</th>
+                    <th>@Html.DisplayNameFor(model => model.safety_qty)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.item_unit)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.unit_price)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.total_price)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.currency)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_remarks)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.item_picture)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ConsumbleId" data-bs-toggle="modal" data-bs-target="#editmodal" onclick="loadEditModalConsumables(@item.ConsumbleId)">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ConsumbleId" data-bs-toggle="modal" data-bs-target="#detailmodal" onclick="loadDetailsModalConsumables(@item.ConsumbleId)">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ConsumbleId">Delete</a>
+                        </td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.date_reg)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.part_number)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.maker)</td>
+                        <td>@Html.DisplayFor(modelItem => item.supplier)</td>
+                        <td>@Html.DisplayFor(modelItem => item.total_qty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.consum_qty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.safety_qty)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.item_unit)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.unit_price)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.total_price)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.currency)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_remarks)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.item_picture)</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+   
+</div>
+
+<!-- Modal from add data-->
+<div class="modal fade" id="createmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Item Request</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("~/Views/Consumables/Create.cshtml", new Consumables());
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal from add data-->
+<div class="modal fade" id="editmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Registration</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("~/Views/Consumables/Edit.cshtml", new Consumables());
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal from add data-->
+<div class="modal fade" id="detailmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Update registration</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button> *@
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("~/Views/Consumables/Details.cshtml", new Consumables());
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+
+    }
+
+}
+
+

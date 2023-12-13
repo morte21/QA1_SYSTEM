@@ -1,0 +1,63 @@
+﻿@model QA1_SYSTEM.Models.EquipmentMachine
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EquipmentMachine</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_reg)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_reg)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.equipment_category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.equipment_category)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.part_number)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.part_number)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.machine_type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.machine_type)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.active_user)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.active_user)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.path_pic)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.path_pic)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EQPid" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

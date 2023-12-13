@@ -1,0 +1,144 @@
+﻿@model QA1_SYSTEM.Models.EquipmentMachine
+
+@{
+    ViewData["Title"] = "EditHistory";
+}
+
+
+<h4>Equipment | Machine Records</h4>
+<hr />
+<div class="card" style="padding-top:20px;">
+    <form asp-action="EditHistory" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+                <input readonly type="hidden" asp-for="EQPid" />
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="date_reg" class="control-label"></label>
+                        <input readonly asp-for="date_reg" class="form-control" />
+                        <span asp-validation-for="date_reg" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="equipment_category" class="control-label"></label>
+                        <input readonly asp-for="equipment_category" class="form-control" />
+                        <span asp-validation-for="equipment_category" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="part_number" class="control-label"></label>
+                        <input readonly asp-for="part_number" class="form-control" />
+                        <span asp-validation-for="part_number" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="description" class="control-label"></label>
+                        <input readonly asp-for="description" class="form-control" />
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="machine_type" class="control-label"></label>
+                        <input readonly asp-for="machine_type" class="form-control" />
+                        <span asp-validation-for="machine_type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="active_user" class="control-label"></label>
+                        <input readonly asp-for="active_user" class="form-control" />
+                        <span asp-validation-for="active_user" class="text-danger"></span>
+                    </div>
+                    
+
+                </div>
+                
+            </div>
+        </div>
+        
+    </form>
+    <div style="padding:10px;">
+        <button type="button" class="btn btn-dark float-end" data-bs-toggle="modal" data-bs-target="#createModal">
+            Add Data
+        </button>
+    </div>
+
+
+<div class="card" style="padding:15px; margin: 5px;">
+    <h5 class="card-header">History</h5>
+    <hr />
+    <div class="table-responsive text-nowrap">
+            <table id="equipmachine_table" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        Trouble
+                    </th>
+                    <th>
+                        Date Encounter
+                    </th>
+                    <th>
+                        Remarks
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.equipmentMachineHistory)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="EquipmentMachineHistory" asp-action="Edit" asp-route-id="@item.EqpMacId">Edit</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EquipmentMachine.active_user)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.trouble_encounter)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.trouble_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.remarks)
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<div style="padding-top:10px;">
+    <a asp-action="IndexHistory">Back to List</a>
+</div>
+<!-- Modal from add data-->
+<div class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Computer History</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button> *@
+            </div>
+            <div class="modal-body">
+                @{
+                  Html.RenderPartial("~/Views/EquipmentMachineHistory/Create.cshtml", new QA1_SYSTEM.Models.EquipmentMachineHistory { EQPid = Model.EQPid });
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

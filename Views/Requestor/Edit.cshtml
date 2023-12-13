@@ -1,0 +1,71 @@
+﻿@model QA1_SYSTEM.Models.Requestor
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4>Update</h4>
+<hr />
+<div class="card" style="padding:20px; width:70%;">
+    <form asp-action="Edit">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input hidden readonly asp-for="RequestId" />
+                <input hidden readonly asp-for="ConsumbleId" class="form-control" />
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="request_ate" class="control-label"></label>
+                        <input asp-for="request_ate" class="form-control" />
+                        <span asp-validation-for="request_ate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="part_number" class="control-label"></label>
+                        <input asp-for="part_number" class="form-control" />
+                        <span asp-validation-for="part_number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="item_description" class="control-label"></label>
+                        <input asp-for="item_description" class="form-control" />
+                        <span asp-validation-for="item_description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="request_qty" class="control-label"></label>
+                        <input asp-for="request_qty" class="form-control" />
+                        <span asp-validation-for="request_qty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="requestor_name" class="control-label"></label>
+                        <input asp-for="requestor_name" class="form-control" />
+                        <span asp-validation-for="requestor_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="reason_request" class="control-label"></label>
+                        <input asp-for="reason_request" class="form-control" />
+                        <span asp-validation-for="reason_request" class="text-danger"></span>
+                    </div>
+                    
+
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+    <div style="padding-top:30px;">
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

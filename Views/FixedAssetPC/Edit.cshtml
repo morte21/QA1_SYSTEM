@@ -1,0 +1,80 @@
+﻿@model QA1_SYSTEM.Models.FixedAssetPC
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>FixedAssetPC</h4>
+<hr />
+<div class="card" style="padding:20px; width:70%;">
+    <form asp-action="Edit">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="fixed_asset_no" class="control-label"></label>
+                        <input asp-for="fixed_asset_no" class="form-control" />
+                        <span asp-validation-for="fixed_asset_no" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="fixed_asset_date" class="control-label"></label>
+                        <input asp-for="fixed_asset_date" class="form-control" />
+                        <span asp-validation-for="fixed_asset_date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="inventory_found" class="control-label"></label>
+                        <input asp-for="inventory_found" class="form-control" />
+                        <span asp-validation-for="inventory_found" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="inventory_date" class="control-label"></label>
+                        <input asp-for="inventory_date" class="form-control" />
+                        <span asp-validation-for="inventory_date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="inventory_year" class="control-label"></label>
+                        <input asp-for="inventory_year" class="form-control" />
+                        <span asp-validation-for="inventory_year" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" readonly asp-for="FixedAssetPCId" />
+                    <input type="hidden" readonly asp-for="ComputerId" class="form-control" />
+                    
+                   
+                    <div class="form-group">
+                        <label asp-for="item_location" class="control-label"></label>
+                        <input asp-for="item_location" class="form-control" />
+                        <span asp-validation-for="item_location" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="pic_path" class="control-label"></label>
+                        <input asp-for="pic_path" class="form-control" />
+                        <span asp-validation-for="pic_path" class="text-danger"></span>
+                    </div>
+                    
+
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+    <div style="padding-top:30px;">
+        <a asp-controller="Computers" asp-action="EditFixedAsset" asp-route-id="@Model.ComputerId">Back to List</a>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

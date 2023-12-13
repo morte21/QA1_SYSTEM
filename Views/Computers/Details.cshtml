@@ -1,0 +1,87 @@
+﻿@model QA1_SYSTEM.Models.Computers
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4>Computers</h4>
+
+<div class="card" style="padding:20px;">
+    
+    <div>
+        <div class="col">
+            <a href="@Url.Content("~/computers/" + Model.path_pic)" target="_blank">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANBJREFUSEvtlWsNwjAURs8UgAPAARLmACygDFAAEpAwHCABFEA+siZN10fapoQE7s9m9zv3vY7G1jXW56OAHtgDy4KsbsAOuLi+dgb6aFEgblzkv4oBnhXixnVScvvhD1CZqkt0BObAJtCvKsAV0CjLNDEzDyQboIi1F+tRfBhFt8CpFmAilrggB0fwDAgUtdCYPpyIfSLqxb0UoLV3I45pmR3K7oFP1HcgvwOgevpGL3S/UqflnamdrmZcdU9dVOOTDUgNRHWTfxsQzL75T/8FgEAoGdn7svAAAAAASUVORK5CYII=" />
+                View Picture
+            </a>
+        </div>
+
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_reg)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_reg)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.computer_category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.computer_category)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.processor_name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.processor_name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ram_capacity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ram_capacity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.hdd_capacty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.hdd_capacty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.os_installed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.os_installed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ip_sdp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ip_sdp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ip_local)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ip_local)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.active_user)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.active_user)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.path_pic)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.path_pic)
+        </dd>
+    </dl>
+</div>
+@* <div>
+    <a asp-action="Edit" asp-route-id="@Model?.ComputerId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div> *@

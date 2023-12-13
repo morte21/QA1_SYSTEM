@@ -1,0 +1,85 @@
+﻿@model QA1_SYSTEM.Models.EquipmentMachine
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>UPDATE</h4>
+<hr />
+<div class="card" style="padding:20px;">
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="EQPid" />
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="date_reg" class="control-label"></label>
+                        <input type="date" asp-for="date_reg" class="form-control" />
+                        <span asp-validation-for="date_reg" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="equipment_category" class="control-label"></label>
+                        <select required asp-for="equipment_category" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Handheld">Handheld</option>
+                            <option value="Inspection Machine Equipment">Inspection Machine Equipment</option>
+                            <option value="Stationary equipment">Stationary equipment</option>
+                            <option value="Uncategorized">Uncategorized</option>
+                        </select>
+                        <span asp-validation-for="equipment_category" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="part_number" class="control-label"></label>
+                        <input asp-for="part_number" class="form-control" />
+                        <span asp-validation-for="part_number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="description" class="control-label"></label>
+                        <textarea asp-for="description" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+                        <label asp-for="machine_type" class="control-label"></label>
+                        <select required asp-for="machine_type" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Handheld">Handheld</option>
+                            <option value="Waveform/Signal Testing Equipment">Waveform/Signal Testing Equipment</option>
+                            <option value="Power Supply">Power Supply</option>
+                            <option value="DAQ Device">DAQ Device</option>
+                            <option value="Withstanding and Insulation equipment">Withstanding and Insulation equipment</option>
+                            <option value="Uncategorized">Uncategorized</option>
+                        </select>
+                        <span asp-validation-for="machine_type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="active_user" class="control-label"></label>
+                        <input asp-for="active_user" class="form-control" />
+                        <span asp-validation-for="active_user" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="_pathPic">Upload Picture</label>
+                        <input type="file" id="_pathPic" name="_pathPic" class="form-control-file" accept=".jpg, .jpeg, .png, .gif, .bmp" />
+                        <input hidden asp-for="path_pic" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="col-md-12" style="padding-top:20px;">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

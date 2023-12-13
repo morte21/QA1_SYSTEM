@@ -1,0 +1,111 @@
+﻿@model QA1_SYSTEM.Models.Consumables
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<h4>Consumables</h4>
+<div class="card" style="padding:20px;">
+    <div>
+        <div class="col">
+            <a href="@Url.Content("~/consumables/" + Model.item_picture)" target="_blank">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANBJREFUSEvtlWsNwjAURs8UgAPAARLmACygDFAAEpAwHCABFEA+siZN10fapoQE7s9m9zv3vY7G1jXW56OAHtgDy4KsbsAOuLi+dgb6aFEgblzkv4oBnhXixnVScvvhD1CZqkt0BObAJtCvKsAV0CjLNDEzDyQboIi1F+tRfBhFt8CpFmAilrggB0fwDAgUtdCYPpyIfSLqxb0UoLV3I45pmR3K7oFP1HcgvwOgevpGL3S/UqflnamdrmZcdU9dVOOTDUgNRHWTfxsQzL75T/8FgEAoGdn7svAAAAAASUVORK5CYII=" />
+                View Picture
+            </a>
+        </div>
+
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.date_reg)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.date_reg)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.item_category)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.item_category)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.part_number)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.part_number)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.item_description)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.item_description)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.maker)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.maker)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.supplier)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.supplier)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.total_qty)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.total_qty)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.consum_qty)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.consum_qty)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.safety_qty)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.safety_qty)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.item_unit)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.item_unit)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.unit_price)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.unit_price)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.total_price)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.total_price)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.item_remarks)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.item_remarks)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.item_picture)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.item_picture)
+        </dd>
+    </dl>
+    <div style="padding-top:20px;">
+        <a asp-action="Edit" asp-route-id="@Model?.ConsumbleId">Edit</a>
+        @* <a asp-action="Index">Back to List</a> *@
+    </div>
+</div>
+

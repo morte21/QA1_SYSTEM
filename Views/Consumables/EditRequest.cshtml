@@ -1,0 +1,216 @@
+﻿@model QA1_SYSTEM.Models.Consumables
+
+@{
+    ViewData["Title"] = "EditRequest";
+}
+@* <link rel="stylesheet" href="~/lib/bootstrap-5.3.2-dist/css/bootstrap.css"> *@
+<h4>Item Request</h4>
+<hr />
+
+<div class="card" style="padding:10px;">
+    <form asp-action="EditRequest" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ConsumbleId" />
+                <div class="col-md-6" style="padding-top:10px;">
+                    
+                    <div class="form-group">
+                        <label asp-for="part_number" class="control-label"></label>
+                        <input readonly asp-for="part_number" class="form-control" />
+                        <span asp-validation-for="part_number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="item_description" class="control-label"></label>
+                        <input readonly asp-for="item_description" class="form-control" />
+                        <span asp-validation-for="item_description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input readonly hidden type="date" asp-for="date_reg" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <select readonly hidden asp-for="item_category" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Office Supply">Office Supply</option>
+                            <option value="Machine Parts[Replacement]">Machine Parts[Replacement]</option>
+                            <option value="Machine Parts[Consumables]">Machine Parts[Consumables]</option>
+                            <option value="Machine Parts[Request]">Machine Parts[Request]</option>
+                            <option value="Stocks">Stocks</option>
+                            <option value="Non-Stocks">Non-Stocks</option>
+                            <option value="PPE">PPE</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input readonly hidden asp-for="maker" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input readonly hidden asp-for="supplier" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="total_qty" class="control-label"></label>
+                        <input readonly id="total_qty" asp-for="total_qty" class="form-control" />
+                        <span asp-validation-for="total_qty" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding-top:10px;">
+                    <div class="form-group">
+                        <label asp-for="consum_qty" class="control-label"></label>
+                        <input readonly id="consum_qty" asp-for="consum_qty" oninput="calculateTotals()" class="form-control" />
+                        <span asp-validation-for="consum_qty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="safety_qty" class="control-label"></label>
+                        <input readonly id="safety_qty" asp-for="safety_qty" oninput="calculateTotals()" class="form-control" />
+                        <span asp-validation-for="safety_qty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="item_unit" class="control-label"></label>
+                        <input readonly asp-for="item_unit" class="form-control" />
+                        <span asp-validation-for="item_unit" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input hidden id="unit_price" asp-for="unit_price" oninput="calculateTotalValue()" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input hidden readonly id="total_price" asp-for="total_price" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input hidden readonly asp-for="item_remarks" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <select readonly hidden asp-for="currency" class="form-control">
+                            <option value="">Select</option>
+                            <option value="USD">USD</option>
+                            <option value="PHP">PHP</option>
+                            <option value="JPY">JPY</option>
+
+                        </select>
+                        <span asp-validation-for="currency" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input hidden asp-for="item_picture" class="form-control" />
+                    </div>
+                    
+
+                </div>
+                
+               
+                
+            </div>
+        </div>
+        <hr />
+        <div style="padding:10px;">
+
+            <button type="button" class="btn btn-dark float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Add Data
+            </button>
+        </div>
+        
+        
+
+    </form>
+
+    <div class="card" style="padding:15px;">
+        <h5 class="card-header">Requestor</h5>
+        <hr />
+        <div class="table-responsive text-nowrap">
+            <table id="consumable_table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th hidden>
+
+                        </th>
+                        <th>
+                            Request Date
+                        </th>
+                        <th>
+                            Part Number
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Request Quantity
+                        </th>
+                        <th>
+                            Requestor
+                        </th>
+                        <th>
+                            Reason of request
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Requestor)
+                    {
+                        <tr>
+                            <td hidden>
+                                @item.ConsumbleId
+                            </td>
+                            <td>
+                                @item.request_ate
+                            </td>
+                            <td>
+                                @item.part_number
+                            </td>
+                            <td>
+                                @item.item_description
+                            </td>
+                            <td>
+                                @item.request_qty
+                            </td>
+                            <td>
+                                @item.requestor_name
+                            </td>
+                            <td>
+                                @item.reason_request
+                            </td>
+                            <td>
+                                <a asp-controller="Requestor" asp-action="Edit" asp-route-id="@item.RequestId">Edit</a> |
+                                <a asp-controller="Requestor" asp-action="Delete" asp-route-id="@item.RequestId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div style="padding-top:10px;">
+    <a asp-action="RequestorIndex">Back to List</a>
+</div>
+
+<!-- Modal from add data-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Item Request</h1>
+                <div class="outer">
+                    <div data-bs-dismiss="modal" class="inner">
+                        <label class="labelModal">Back</label>
+                    </div>
+                </div>
+                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button> *@
+            </div>
+            <div class="modal-body">
+                @{
+
+                    Html.RenderPartial("~/Views/Requestor/Create.cshtml", new QA1_SYSTEM.Models.Requestor { ConsumbleId = Model.ConsumbleId, part_number = Model.part_number, item_description = Model.item_description });
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+}

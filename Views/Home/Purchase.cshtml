@@ -1,0 +1,66 @@
+﻿@model Global
+
+
+@{
+    ViewData["Title"] = "Purchase";
+}
+
+
+
+<div class="card shadow mb-4" style=" width:100%; height:100vh; padding-left:10px; padding-right:10px; color:white;">
+    <div class="card-header">
+        <strong class="card-title">Purchase Status Monitoring</strong>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card-body" style="height:50vh;">
+                    <canvas id="categoryChart2"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body" style="height:50vh;">
+                    <canvas id="categoryChart3"></canvas>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card-body" style="width:100%;height:30vh;overflow-y: auto; padding:5px;">
+                    <table id="pur_table" class="table" style="font-size:12px;">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Purchasing.date_request)</th>
+                                <th>@Html.DisplayNameFor(model => model.Purchasing.category)</th>
+                                <th>@Html.DisplayNameFor(model => model.Purchasing.part_number)</th>
+                                <th>@Html.DisplayNameFor(model => model.Purchasing.item_description)</th>
+                                <th>@Html.DisplayNameFor(model => model.Purchasing.request_reason)</th>
+                                <th>@Html.DisplayNameFor(model => model.Purchasing.request_status)</th>
+                                <th>@Html.DisplayNameFor(model => model.Purchasing.est_time_arrival)</th>
+                                <th>@Html.DisplayNameFor(model => model.Purchasing.item_comment)</th>
+
+                                <th hidden>@Html.DisplayNameFor(model => model.Purchasing.pr_path)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.purchasing)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.date_request)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.category)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.part_number)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.item_description)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.request_reason)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.request_status)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.est_time_arrival)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.item_comment)</td>
+
+                                    <td hidden>@Html.DisplayFor(modelItem => item.pr_path)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.Requestor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsumbleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.request_ate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.part_number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.item_description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.request_qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.requestor_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.reason_request)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsumbleId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.request_ate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.part_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.item_description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.request_qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.requestor_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reason_request)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RequestId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RequestId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RequestId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
