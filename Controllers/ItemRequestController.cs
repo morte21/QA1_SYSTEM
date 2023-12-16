@@ -23,9 +23,30 @@ namespace QA1_SYSTEM.Controllers
         }
         public IActionResult Index()
         {
+            
             List<ItemRequest> itemRequest;
-            itemRequest = _context.ItemRequest.ToList();
+            itemRequest = _context.ItemRequest
+                .OrderByDescending(x => x.id) // Assuming 'id' is the ID field
+                .Take(0)
+                .ToList();
             return View(itemRequest);
+        }
+
+
+
+        public IActionResult ItemReqLoadData()
+        {
+            var draw = Request.Form["draw"].FirstOrDefault();
+            int start = int.Parse(Request.Form["start"].FirstOrDefault());
+            int length = int.Parse(Request.Form["length"].FirstOrDefault());
+
+            // Query the database based on start, length, filters, etc.
+            var query = _context.ItemRequest.ToList();
+
+            var data = query.Skip(start).Take(length).ToList();
+            var totalCount = query.Count();
+
+            return Json(new { draw = draw, recordsFiltered = totalCount, recordsTotal = totalCount, data = data });
         }
 
         [Authorize]

@@ -32,7 +32,7 @@
                 {
                     <tr>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.id" data-bs-toggle="modal" data-bs-target="#editmodal" onclick="loadEditModalItemRequest(@item.id)">Update</a> |
+                            <a asp-action="Edit" asp-route-id="@item.id" >Update</a> |
                             <a asp-action="Details" asp-route-id="@item.id" data-bs-toggle="modal" data-bs-target="#editmodal" onclick="loadDetailsModalItemRequest(@item.id)">Details</a>
                         </td>
                         <td>@Html.DisplayFor(modelItem => item.status)</td>
@@ -79,7 +79,7 @@
     </div>
 </div>
 
-<!-- Modal from add data-->
+@* <!-- Modal from add data-->
 <div class="modal fade" id="editmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -90,7 +90,6 @@
                         <label class="labelModal">Back</label>
                     </div>
                 </div>
-                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button> *@
             </div>
             <div class="modal-body">
                 @{
@@ -100,7 +99,7 @@
 
         </div>
     </div>
-</div>
+</div> *@
 
 <!-- Modal from add data-->
 <div class="modal fade" id="detailmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

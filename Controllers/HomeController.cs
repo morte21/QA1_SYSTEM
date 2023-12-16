@@ -32,14 +32,14 @@ namespace QA1_SYSTEM.Controllers
             var viewModel = new Global
             {
                 consumables = _context.Consumables.ToList(),
-                computerHistory = _context.ComputerHistory.ToList(),
-                computers = _context.Computers.ToList(),
-                equipmentMachine = _context.EquipmentMachine.ToList(),
-                equipmentMachineHistory = _context.EquipmentMachineHistory.ToList(),
-                fixedAssetEQP = _context.FixedAssetEQP.ToList(),
-                fixedAssetPC = _context.FixedAssetPC.ToList(),
-                itemRequest = _context.ItemRequest.ToList(),
-                requestor = _context.Requestor.ToList(),
+                //computerHistory = _context.ComputerHistory.ToList(),
+                //computers = _context.Computers.ToList(),
+                //equipmentMachine = _context.EquipmentMachine.ToList(),
+                //equipmentMachineHistory = _context.EquipmentMachineHistory.ToList(),
+                //fixedAssetEQP = _context.FixedAssetEQP.ToList(),
+                //fixedAssetPC = _context.FixedAssetPC.ToList(),
+                //itemRequest = _context.ItemRequest.ToList(),
+                //requestor = _context.Requestor.ToList(),
             };
             return View(viewModel);
         }
@@ -48,15 +48,7 @@ namespace QA1_SYSTEM.Controllers
         {
             var viewModel = new Global
             {
-                consumables = _context.Consumables.ToList(),
-                purchasing = _context.Purchasing.ToList(),
-                computers = _context.Computers.ToList(),
-                equipmentMachine = _context.EquipmentMachine.ToList(),
-                equipmentMachineHistory = _context.EquipmentMachineHistory.ToList(),
-                fixedAssetEQP = _context.FixedAssetEQP.ToList(),
-                fixedAssetPC = _context.FixedAssetPC.ToList(),
-                itemRequest = _context.ItemRequest.ToList(),
-                requestor = _context.Requestor.ToList(),
+               purchasing = _context.Purchasing.OrderByDescending(x => x.date_received ).ToList(),
             };
             return View(viewModel);
         }

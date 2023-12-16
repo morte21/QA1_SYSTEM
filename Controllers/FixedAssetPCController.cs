@@ -57,7 +57,7 @@ namespace QA1_SYSTEM.Controllers
             _context.Entry(fixedAssetPC).State = EntityState.Modified;
 
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("EditFixedAsset", "Computers", new { id = fixedAssetPC.ComputerId });
             //return RedirectToAction("EditRequest", "Consumables", new { id = computerHistory.ComputerId });
 
         }

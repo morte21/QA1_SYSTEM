@@ -23,8 +23,124 @@ namespace QA1_SYSTEM.Controllers
         public IActionResult Index()
         {
             List<Purchasing> purchasing;
-            purchasing = _context.Purchasing.ToList();
+            purchasing = _context.Purchasing
+                .OrderByDescending(x => x.id) // Assuming 'id' is the ID field
+                .Take(0)
+                .ToList();
             return View(purchasing);
+        }
+
+        public IActionResult purchaseLoadData()
+        {
+            var draw = Request.Form["draw"].FirstOrDefault();
+            int start = int.Parse(Request.Form["start"].FirstOrDefault());
+            int length = int.Parse(Request.Form["length"].FirstOrDefault());
+
+            // Get global search value
+            string searchValue = Request.Form["search[value]"].FirstOrDefault();
+
+            // Query the database based on start, length, filters, etc.
+            var query = _context.Purchasing.Where(x => x.part_number != null);
+
+
+            // Apply global search filter
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(x =>
+                    x.pr_number.Contains(searchValue) ||
+                    x.purchase_order.Contains(searchValue) ||
+                    x.date_request.ToString().Contains(searchValue) ||
+                    x.purchase_dept.Contains(searchValue) ||
+                    x.category.Contains(searchValue) ||
+                    x.part_number.Contains(searchValue) ||
+                    x.item_description.Contains(searchValue) ||
+                    x.maker.Contains(searchValue) ||
+                    x.supplier.Contains(searchValue) ||
+                    x.request_reason.Contains(searchValue) ||
+                    x.request_status.Contains(searchValue) ||
+                    x.est_time_arrival.Contains(searchValue) ||
+                    x.received_qty.Contains(searchValue) ||
+                    x.item_comment.Contains(searchValue)
+                   
+                // ...other fields here
+                );
+            }
+
+            // Fetch all search values for each column (tfoot)
+            List<string> searchValuesTfoot = new List<string>();
+            for (int i = 0; i < Request.Form.Keys.Count; i++)
+            {
+                string key = Request.Form.Keys.ElementAt(i);
+                if (key.StartsWith("columns") && key.Contains("[search][value]"))
+                {
+                    searchValuesTfoot.Add(Request.Form[key].FirstOrDefault());
+                }
+            }
+
+            // Apply column-wise search filters from tfoot in
+            for (int i = 0; i < searchValuesTfoot.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(searchValuesTfoot[i]))
+                {
+                    string getData = searchValuesTfoot[i];
+
+                    // Adjust search logic for each column based on the index
+                    switch (i)
+                    {
+                        case 1: // Handle search for the first column (adjust these cases based on your column order)
+                            query = query.Where(x => x.pr_number.Contains(getData));
+                            break;
+                        case 2: // Handle search for the second column
+                            query = query.Where(x => x.purchase_order.Contains(getData));
+                            break;
+
+                        case 3: // Handle search for the second column
+                            query = query.Where(x => x.date_request.ToString().Contains(getData));
+                            break;
+                        case 4: // Handle search for the second column
+                            query = query.Where(x => x.purchase_dept.Contains(getData));
+                            break;
+                        case 5: // Handle search for the second column
+                            query = query.Where(x => x.category.Contains(getData));
+                            break;
+                        case 6: // Handle search for the second column
+                            query = query.Where(x => x.part_number.Contains(getData));
+                            break;
+                        case 7: // Handle search for the second column
+                            query = query.Where(x => x.item_description.Contains(getData));
+                            break;
+                        case 8: // Handle search for the second column
+                            query = query.Where(x => x.maker.Contains(getData));
+                            break;
+                        case 9: // Handle search for the second column
+                            query = query.Where(x => x.supplier.Contains(getData));
+                            break;
+                        case 15: // Handle search for the second column
+                            query = query.Where(x => x.request_reason.Contains(getData));
+                            break;
+                        case 16: // Handle search for the second column
+                            query = query.Where(x => x.request_status.Contains(getData));
+                            break;
+                        case 20: // Handle search for the second column
+                            query = query.Where(x => x.est_time_arrival.Contains(getData));
+                            break;
+                        case 23: // Handle search for the second column
+                            query = query.Where(x => x.received_qty.Contains(getData));
+                            break;
+                        case 24: // Handle search for the second column
+                            query = query.Where(x => x.item_comment.Contains(getData));
+                            break;
+                        
+                            // Add cases for other columns here...
+                    }
+                }
+            }
+
+            // Perform data filtering and pagination
+            var data = query.Skip(start).Take(length).ToList();
+            var totalCount = query.Count();
+
+            return Json(new { draw = draw, recordsFiltered = totalCount, recordsTotal = totalCount, data = data });
         }
 
 

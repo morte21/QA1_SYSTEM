@@ -61,19 +61,19 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="total_qty" class="control-label"></label>
-                        <input readonly id="total_qty" asp-for="total_qty" class="form-control" />
+                        <input readonly id="total_qty" type="number" asp-for="total_qty" class="form-control" />
                         <span asp-validation-for="total_qty" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="consum_qty" class="control-label"></label>
-                        <input id="consum_qty" asp-for="consum_qty" oninput="calculateTotals()" class="form-control" />
+                        <input id="consum_qty" asp-for="consum_qty" type="number" oninput="calculateTotals()" class="form-control" />
                         <span asp-validation-for="consum_qty" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="safety_qty" class="control-label"></label>
-                        <input id="safety_qty" asp-for="safety_qty" oninput="calculateTotals()" class="form-control" />
+                        <input id="safety_qty" asp-for="safety_qty" type="number" oninput="calculateTotals()" class="form-control" />
                         <span asp-validation-for="safety_qty" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -89,7 +89,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="unit_price" class="control-label"></label>
-                        <input id="unit_price" asp-for="unit_price" oninput="calculateTotalValue()" class="form-control" />
+                        <input id="unit_price" asp-for="unit_price" type="number" oninput="calculateTotalValue()" class="form-control" />
                         <span asp-validation-for="unit_price" class="text-danger"></span>
                     </div>
                     <div class="form-group">

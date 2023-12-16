@@ -21,15 +21,71 @@ namespace QA1_SYSTEM.Controllers
         public IActionResult Index()
         {
             List<Consumables> consumableViewModel;
-            consumableViewModel = _context.Consumables.ToList();
+            consumableViewModel = _context.Consumables
+                .OrderByDescending(x => x.ConsumbleId) // Assuming 'id' is the ID field
+                .ToList();
             return View(consumableViewModel);
         }
 
         public IActionResult RequestorIndex()
         {
             List<Consumables> consumableViewModel;
-            consumableViewModel = _context.Consumables.ToList();
+            consumableViewModel = _context.Consumables
+                .OrderByDescending(x => x.ConsumbleId) // Assuming 'id' is the ID field
+                .ToList();
             return View(consumableViewModel);
+        }
+
+        public IActionResult CONLoadData1()
+        {
+            var draw = Request.Form["draw"].FirstOrDefault();
+            int start = int.Parse(Request.Form["start"].FirstOrDefault());
+            int length = int.Parse(Request.Form["length"].FirstOrDefault());
+
+            // Get global search value
+            string searchValue = Request.Form["search[value]"].FirstOrDefault();
+
+            // Query the database based on start, length, filters, etc.
+            var query = _context.Consumables.Where(x => x.item_category != null);
+
+
+            // Apply global search filter
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(x =>
+                    x.item_category.Contains(searchValue) ||
+                    x.part_number.Contains(searchValue) ||
+                    x.item_description.Contains(searchValue) ||
+                    x.maker.Contains(searchValue) ||
+                    x.supplier.Contains(searchValue) ||
+                    x.total_qty.Contains(searchValue) ||
+                    x.consum_qty.Contains(searchValue) ||
+                    x.safety_qty.Contains(searchValue) ||
+                    
+                    x.item_remarks.Contains(searchValue)
+                // ...other fields here
+                );
+            }
+
+            var data = query.Skip(start).Take(length).ToList();
+            var totalCount = query.Count();
+
+            return Json(new { draw = draw, recordsFiltered = totalCount, recordsTotal = totalCount, data = data });
+        }
+
+        public IActionResult CONLoadData2()
+        {
+            var draw = Request.Form["draw"].FirstOrDefault();
+            int start = int.Parse(Request.Form["start"].FirstOrDefault());
+            int length = int.Parse(Request.Form["length"].FirstOrDefault());
+
+            // Query the database based on start, length, filters, etc.
+            var query = _context.Consumables.Where(x => x.ConsumbleId != null);
+
+            var data = query.Skip(start).Take(length).ToList();
+            var totalCount = query.Count();
+
+            return Json(new { draw = draw, recordsFiltered = totalCount, recordsTotal = totalCount, data = data });
         }
 
         [HttpGet]

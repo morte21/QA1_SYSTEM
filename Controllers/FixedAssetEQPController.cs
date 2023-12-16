@@ -36,7 +36,7 @@ namespace QA1_SYSTEM.Controllers
             _context.Add(fixedAssetEQP);
             _context.SaveChanges();
 
-            return RedirectToAction("EditHistory", "EquipmentMachine", new { id = fixedAssetEQP.EQPassetId });
+            return RedirectToAction("EditFixedAsset", "EquipmentMachine", new { id = fixedAssetEQP.EQPid });
         }
 
         [Authorize(Roles = "Administrator, Moderator")]
@@ -57,7 +57,7 @@ namespace QA1_SYSTEM.Controllers
             _context.Entry(equipmentMachineHistory).State = EntityState.Modified;
 
             _context.SaveChanges();
-            return RedirectToAction("EditHistory", "EquipmentMachine", new { id = equipmentMachineHistory.EQPassetId });
+            return RedirectToAction("EditFixedAsset", "EquipmentMachine", new { id = equipmentMachineHistory.EQPid });
 
         }
     }

@@ -56,7 +56,7 @@
                 {
                     <tr>
                         <td>
-                            <a id="editBtn" asp-action="Edit" asp-route-id="@item.id" data-bs-toggle="modal" data-bs-target="#editmodal" onclick="loadEditModal(@item.id)">Edit</a> |
+                            <a id="editBtn" asp-action="Edit" asp-route-id="@item.id" >Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.id" data-bs-toggle="modal" data-bs-target="#detailmodal" onclick="loadDetailsModal(@item.id)">Details</a> |
                             <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
                         </td>
@@ -118,7 +118,7 @@
 </div>
 
 
-<!-- Modal from add data-->
+@* <!-- Modal from add data-->
 <div class="modal fade" id="editmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -129,7 +129,6 @@
                         <label class="labelModal">Back</label>
                     </div>
                 </div>
-                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button> *@
             </div>
             <div class="modal-body">
                 @{
@@ -140,7 +139,7 @@
         </div>
     </div>
 </div>
-
+ *@
 <!-- Modal from add data-->
 <div class="modal fade" id="detailmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
