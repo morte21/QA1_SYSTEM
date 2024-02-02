@@ -1,16 +1,16 @@
-﻿
+﻿@model Global
 @{
     ViewData["Title"] = "Home Page";
 }
 
 
-<div class="">
+<div>
 @* 
 <div class="image-container">
     <img style="width: 30%;" src="/images/img-logo.png" alt="sanyodenki" class="moving-image" />
 </div>
 *@
-<div class="container">
+@* <div class="container">
         <div class="row">
             <div class="col-md-12">     
                 <div class="text">
@@ -63,24 +63,246 @@
             </div>
 
         </div>
-</div>
+</div> *@
 
-    
-   
-    
-
-
-    
-    
 </div> 
 
+<h1>QUALITY ASSURANCE 1 MANAGEMENT SYSTEM</h1>
+@* quick access *@
+<div style="display: flex; justify-content: center; gap: 10px; ">
+
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Register Consumables" >
+                <a class="nav-link" asp-area="" asp-controller="Consumables" asp-action="Index">
+                <i class="fe fe-shopping-cart itimanmo" ></i>
+                </a>
+            </button>
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Item Request">
+                <a class="nav-link" asp-area="" asp-controller="Consumables" asp-action="RequestorIndex">
+                <i class="fe fe-folder-plus itimanmo"></i>
+                </a>
+            </button>
+
+            <button type="button" class="btn btn-lg btn-outline-danger  walangborder" title="Need to Purchase">
+                <a class="nav-link " asp-area="" asp-controller="Consumables" asp-action="IndexCritical" style="color:red;">
+                <i class="fe fe-shopping-bag itimanmo"></i>
+                </a>
+            </button>
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Purchase Request">
+                <a class="nav-link" asp-area="" asp-controller="Purchase" asp-action="Index">
+                <i class="fe fe-layers itimanmo"></i>
+                </a>
+            </button>
+
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Computer Registration">
+                <a class="nav-link" asp-area="" asp-controller="Computers" asp-action="Index">
+                <i class="fe fe-pen-tool itimanmo"></i>
+                </a>
+            </button>
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Computer Records">
+                <a class="nav-link" asp-area="" asp-controller="Computers" asp-action="IndexHistory">
+                <i class="fe fe-log-in itimanmo"></i>
+                </a>
+            </button>
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Computer Fixed Asset">
+                <a class="nav-link " asp-area="" asp-controller="Computers" asp-action="IndexFixedAsset">
+                <i class="fe fe-credit-card itimanmo"></i>
+                </a>
+            </button>
+
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Equipment & Machine Registration">
+                <a class="nav-link " asp-area="" asp-controller="EquipmentMachine" asp-action="Index">
+                <i class="fe fe-dollar-sign itimanmo"></i>
+
+                </a>
+            </button>
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Equipment & Machine Records">
+                <a class="nav-link" asp-area="" asp-controller="EquipmentMachine" asp-action="IndexHistory">
+                <i class="fe fe-log-in itimanmo"></i>
+                </a>
+            </button>
+            <button type="button" class="btn btn-lg btn-outline-primary walangborder" title="Equipment & Machine Fixed Asset">
+                <a class="nav-link " asp-area="" asp-controller="EquipmentMachine" asp-action="IndexFixedAsset">
+                <i class="fe fe-credit-card itimanmo"></i>
+                </a>
+            </button>
+
+        
+</div>
+
+
+@* graph *@
+<div class="row">
+    
+    @* LAYER 1 *@
+    <div class="col-md-6">
+        <div class="card shadow mb-4" style="padding:10px;">
+            <div class="card-header">
+                <strong class="card-title">Stocks</strong>
+            </div>
+            <canvas id="categoryChart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="card shadow mb-4" style="padding:10px;">
+                <div class="card-header">
+                    <strong class="card-title">Summary</strong>
+                </div>
+                <div>
+                    <div class="container" style="padding:5px;">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="centermo">
+                                        <label><b>Waiting for arrival</b></label>
+                                        <h4>@Model.totalArrivalCount</h4>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="centermo">
+                                        <label><b>Ongoing Approval</b></label>
+                                        <h4>@Model.totalApprovalCount</h4>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="centermo">
+                                        <label><b>Received for <span id="currentMonth"></span></b></label>
+                                        <h4>@Model.totalReceivedCount</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="centermo">
+                                        <label><b>Active Computers</b></label>
+                                        <h4>@Model.totalComputersCount</h4>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="centermo">
+                                        <label><b>Active Machine & Equipments</b></label>
+                                        <h4>@Model.totalEqpCount</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+    @* LAYER 2 *@
+
+    <div class="col-md-6">
+        <div class="card shadow mb-4" style="padding:10px;">
+            <div class="card-header">
+                <strong class="card-title">Purchase Items</strong>
+            </div>
+            <canvas id="categoryChart2"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow mb-4" style="padding:10px;">
+            <div class="card-header">
+                <strong class="card-title">Purchase Status</strong>
+            </div>
+            <canvas id="categoryChart3"></canvas>
+        </div>
+    </div>
+    
+</div>
 
 
 
 
 
+<table hidden id="pur_table" class="table" style="font-size:12px;">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Purchasing.date_request)</th>
+            <th>@Html.DisplayNameFor(model => model.Purchasing.category)</th>
+            <th>@Html.DisplayNameFor(model => model.Purchasing.part_number)</th>
+            <th>@Html.DisplayNameFor(model => model.Purchasing.item_description)</th>
+            <th>@Html.DisplayNameFor(model => model.Purchasing.request_reason)</th>
+            <th>@Html.DisplayNameFor(model => model.Purchasing.request_status)</th>
+            <th>@Html.DisplayNameFor(model => model.Purchasing.date_received)</th>
+            <th>@Html.DisplayNameFor(model => model.Purchasing.item_comment)</th>
+
+            <th hidden>@Html.DisplayNameFor(model => model.Purchasing.pr_path)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.purchasing)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.date_request)</td>
+                <td>@Html.DisplayFor(modelItem => item.category)</td>
+                <td>@Html.DisplayFor(modelItem => item.part_number)</td>
+                <td>@Html.DisplayFor(modelItem => item.item_description)</td>
+                <td>@Html.DisplayFor(modelItem => item.request_reason)</td>
+                <td>@Html.DisplayFor(modelItem => item.request_status)</td>
+                <td>@Html.DisplayFor(modelItem => item.date_received)</td>
+                <td>@Html.DisplayFor(modelItem => item.item_comment)</td>
+
+                <td hidden>@Html.DisplayFor(modelItem => item.pr_path)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table hidden id="con_table" class="table" style="font-size:12px;">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Consumables.item_category)</th>
+            <th>@Html.DisplayNameFor(model => model.Consumables.part_number)</th>
+            <th>@Html.DisplayNameFor(model => model.Consumables.item_description)</th>
+            <th>@Html.DisplayNameFor(model => model.Consumables.total_qty)</th>
+            <th hidden>@Html.DisplayNameFor(model => model.Consumables.item_picture)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.consumables)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.item_category)</td>
+                <td>@Html.DisplayFor(modelItem => item.part_number)</td>
+                <td>@Html.DisplayFor(modelItem => item.item_description)</td>
+                <td>@Html.DisplayFor(modelItem => item.total_qty)</td>
+                <td hidden>@Html.DisplayFor(modelItem => item.item_picture)</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 
-@* <div class="sketchfab-embed-wrapper"> 
-    <iframe title="Cooling fan animated" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="1024" height="768" src="https://sketchfab.com/models/c2ae5f971caa45288f830e843ca9544e/embed?autospin=1&autostart=1"> </iframe> 
-    <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> Cooling fan animated  by  AfterDarkVisuals on Sketchfab</p></div> *@
+
+
+<script>
+    // Get the current date
+    var currentDate = new Date();
+
+    // Define an array of month names
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+
+    // Get the month index (months are zero-based)
+    var monthIndex = currentDate.getMonth();
+
+    // Get the month name from the array using the month index
+    var currentMonthName = monthNames[monthIndex];
+
+    // Display the current month name in the HTML
+    document.getElementById("currentMonth").innerText = currentMonthName;
+</script>

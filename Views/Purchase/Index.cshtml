@@ -15,15 +15,23 @@
 </div>
 
 <div class="card" style="padding:20px;">
-    <h5 class="card-header">Equipment Calibration Data</h5>
-    <hr />
+    <div class="righto card-header">
+        <b>
+            <label>FOR APPROVAL: @ViewBag.APPROVAL &ensp;</label> |
+            <label>&ensp; FOR ARRIVAL: @ViewBag.ARRIVAL &ensp;</label> |
+            <label>&ensp; RECEIVED ITEMS: @ViewBag.RECEIVED &ensp;</label>
+
+        </b>
+    </div>
     <div class="table-responsive text-nowrap">
         <table id="purchase_table" class="display" style="width:100%;">
             <thead>
                 <tr>
                     <th></th>
                     <th>@Html.DisplayNameFor(model => model.pr_number)</th>
+                    <th>@Html.DisplayNameFor(model => model.request_status)</th>
                     <th>@Html.DisplayNameFor(model => model.purchase_order)</th>
+                    
                     <th>@Html.DisplayNameFor(model => model.date_request)</th>
                     <th>@Html.DisplayNameFor(model => model.purchase_dept)</th>
                     <th>@Html.DisplayNameFor(model => model.category)</th>
@@ -37,7 +45,7 @@
                     <th hidden>@Html.DisplayNameFor(model => model.total_price)</th>
                     <th hidden>@Html.DisplayNameFor(model => model.item_currency)</th>
                     <th>@Html.DisplayNameFor(model => model.request_reason)</th>
-                    <th>@Html.DisplayNameFor(model => model.request_status)</th>
+                    
                     <th hidden>@Html.DisplayNameFor(model => model.date_submitPR)</th>
                     <th hidden>@Html.DisplayNameFor(model => model.person_submitPR)</th>
                     

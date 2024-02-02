@@ -15,6 +15,17 @@ namespace QA1_SYSTEM.Models
         public Purchasing Purchasing { get; set; }
         public Requestor Requestor { get; set; }
 
+        public int totalComputersCount { get; set; }
+        public int totalEqpCount { get; set; }
+
+        public int totalArrivalCount { get; set; }
+        public int totalApprovalCount { get; set; }
+
+        public int totalReceivedCount { get; set; }
+
+        public int totalStocksCount { get; set; }
+
+
 
         public IEnumerable<Computers> computers { get; set; }
         public IEnumerable<ComputerHistory> computerHistory { get; set; }
@@ -26,5 +37,7 @@ namespace QA1_SYSTEM.Models
         public IEnumerable<ItemRequest> itemRequest { get; set; }
         public IEnumerable<Purchasing> purchasing { get; set; }
         public IEnumerable<Requestor> requestor { get; set; }
+
+       
     }
 }

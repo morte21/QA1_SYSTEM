@@ -1,0 +1,66 @@
+﻿@model IEnumerable<QA1_SYSTEM.Models.Consumables>
+
+@{
+    ViewData["Title"] = "IndexCritical";
+}
+
+<h1 style="color:red">Consumable Stocks Critical Level (Need to Purchase)</h1>
+
+<div class="card" style="padding:20px;">
+    <div class="righto card-header">
+        <b>
+            <label>NEEDED TO PURCHASE: @ViewBag.REQUEST &ensp;</label>
+
+        </b>
+    </div>
+
+    <div class="table-responsive text-nowrap">
+        <table id="consStocks_table" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th hidden>@Html.DisplayNameFor(model => model.date_reg) </th>
+                    <th>@Html.DisplayNameFor(model => model.item_category)</th>
+                    <th>@Html.DisplayNameFor(model => model.part_number)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_description)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.maker) </th>
+                    <th>@Html.DisplayNameFor(model => model.supplier)</th>
+                    <th>@Html.DisplayNameFor(model => model.total_qty)</th>
+                    <th>@Html.DisplayNameFor(model => model.consum_qty)</th>
+                    <th>@Html.DisplayNameFor(model => model.safety_qty)</th>
+                    <th>@Html.DisplayNameFor(model => model.item_unit)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.unit_price)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.total_price)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.item_remarks)</th>
+                    <th hidden>@Html.DisplayNameFor(model => model.currency)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td hidden>@Html.DisplayFor(modelItem => item.date_reg)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.part_number)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_description)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.maker)</td>
+                        <td>@Html.DisplayFor(modelItem => item.supplier)</td>
+                        <td>@Html.DisplayFor(modelItem => item.total_qty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.consum_qty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.safety_qty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.item_unit)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.unit_price)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.total_price)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.item_remarks)</td>
+                        <td hidden>@Html.DisplayFor(modelItem => item.currency)</td>
+                        <td>
+                            <a asp-action="EditCritical" asp-route-id="@item.ConsumbleId">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+</div>
+
+

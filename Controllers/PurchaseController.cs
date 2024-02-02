@@ -24,9 +24,27 @@ namespace QA1_SYSTEM.Controllers
         {
             List<Purchasing> purchasing;
             purchasing = _context.Purchasing
-                .OrderByDescending(x => x.id) // Assuming 'id' is the ID field
+                .OrderBy(x => x.id) // Assuming 'id' is the ID field
                 .Take(0)
                 .ToList();
+
+            // Count the occurrences of each status
+            var statusCounts = _context.Purchasing
+                .Where(x => x.request_status == "FOR APPROVAL" || x.request_status == "WAITING FOR ARRIVAL" || x.request_status == "ITEM RECEIVED")
+                .GroupBy(x => x.request_status)
+                .Select(group => new
+                {
+                    Status = group.Key,
+                    Count = group.Count()
+                })
+                .ToList();
+
+            // Add the counts to ViewData for access in the View
+            ViewData["APPROVAL"] = statusCounts.FirstOrDefault(x => x.Status == "FOR APPROVAL")?.Count ?? 0;
+            ViewData["ARRIVAL"] = statusCounts.FirstOrDefault(x => x.Status == "WAITING FOR ARRIVAL")?.Count ?? 0;
+            ViewData["RECEIVED"] = statusCounts.FirstOrDefault(x => x.Status == "ITEM RECEIVED")?.Count ?? 0;
+
+            
             return View(purchasing);
         }
 
@@ -40,7 +58,7 @@ namespace QA1_SYSTEM.Controllers
             string searchValue = Request.Form["search[value]"].FirstOrDefault();
 
             // Query the database based on start, length, filters, etc.
-            var query = _context.Purchasing.Where(x => x.part_number != null);
+            var query = _context.Purchasing.OrderByDescending(y => y.request_status).Where(x => x.part_number != null);
 
 
             // Apply global search filter

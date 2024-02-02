@@ -1,5 +1,36 @@
 ﻿//DATATABLE LAYOUT
 $(function () {
+    new DataTable('#consStocks_table', {
+        order: [[0, 'desc']],
+        /*"scrollY": '50vh',*/
+        "scrollX": '50vh',
+        "scrollCollapse": true,
+        "paging": true,
+        "select": true,
+
+        lengthMenu: [
+            [25, 40, 50, 100, -1],
+            [25, 40, 50, 100, 'All'],
+        ],
+
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: 'Export to Excel', // Change the button text here
+                exportOptions: {
+                    modifier: {
+                        page: 'all' // Include data from all pages
+                    }
+                }
+            },
+        ],
+
+    });
+});
+
+//DATATABLE LAYOUT
+$(function () {
     new DataTable('#consumable_table', {
         order: [[0, 'desc']],
         /*"scrollY": '50vh',*/
@@ -20,6 +51,11 @@ $(function () {
             {
                 extend: 'excelHtml5',
                 text: 'Export to Excel', // Change the button text here
+                exportOptions: {
+                    modifier: {
+                        page: 'all' // Include data from all pages
+                    }
+                }
             },
         ],
 
@@ -40,6 +76,8 @@ $(function () {
             [25, 40, 50, 100, -1],
             [25, 40, 50, 100, 'All'],
         ],
+
+        
 
         processing: true,
         serverSide: true,
@@ -62,6 +100,7 @@ $(function () {
             },
 
             { data: 'pr_number' },
+            { data: 'request_status' },
             { data: 'purchase_order' },
 
             { data: 'date_request' },
@@ -77,7 +116,7 @@ $(function () {
             { data: 'total_price', visible: false },
             { data: 'item_currency', visible: false },
             { data: 'request_reason' },
-            { data: 'request_status' },
+            
             { data: 'date_submitPR', visible: false },
             { data: 'person_submitPR', visible: false },
             { data: 'po_path', visible: false },
@@ -91,13 +130,17 @@ $(function () {
             { data: 'pr_path', visible: false }
         ],
 
-
-
         dom: 'Bfrtip',
         buttons: [
             {
                 extend: 'excelHtml5',
-                text: 'Export to Excel', // Change the button text here
+                text: 'Export to Excel',
+                exportOptions: {
+                    modifier: {
+                        page: 'all',
+                        selected: true // Include data from all pages
+                    }
+                }
             },
         ],
 
@@ -127,6 +170,11 @@ $(function () {
             {
                 extend: 'excelHtml5',
                 text: 'Export to Excel', // Change the button text here
+                exportOptions: {
+                    modifier: {
+                        page: 'all' // Include data from all pages
+                    }
+                }
             },
         ],
 
@@ -156,6 +204,11 @@ $(function () {
             {
                 extend: 'excelHtml5',
                 text: 'Export to Excel', // Change the button text here
+                exportOptions: {
+                    modifier: {
+                        page: 'all' // Include data from all pages
+                    }
+                }
             },
         ],
 
@@ -184,6 +237,11 @@ $(function () {
             {
                 extend: 'excelHtml5',
                 text: 'Export to Excel', // Change the button text here
+                exportOptions: {
+                    modifier: {
+                        page: 'all' // Include data from all pages
+                    }
+                }
             },
         ],
 
@@ -201,8 +259,8 @@ $(function () {
         ordering: true,
 
         lengthMenu: [
-            [5, 10, -1],
-            [5, 10, 'All'],
+            [10, 20, -1],
+            [10, 20, 'All'],
         ],
         
 
@@ -262,6 +320,11 @@ $(function () {
             {
                 extend: 'excelHtml5',
                 text: 'Export to Excel', // Change the button text here
+                exportOptions: {
+                    modifier: {
+                        page: 'all' // Include data from all pages
+                    }
+                }
             },
         ],
 

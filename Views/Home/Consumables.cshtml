@@ -12,15 +12,15 @@
     <div class="card-header">
         <strong class="card-title">Cabinet Stocks Monitoring</strong>
     </div>
-    <div class="card-body">
+    <div class="container card-body">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 <div class="card-body" style="height:40vh;">
                     <canvas id="categoryChart"></canvas>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card-body" style="width:600px;height:400px;padding:5px;">
+            <div class="col-md-6 col-sm-12">
+                <div class="card-body" style="padding:5px;">
                         <table id="consumableHome_table" class="table" style="color:black;">
                             <thead>
                                 <tr>
@@ -38,7 +38,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            <div class="card" style="align-items: center; justify-items:center; width:450px; height:250px;">
+                                            <div class="card" style="align-items: center; justify-items:center; width:20rem; height:15rem;">
                                                 <div class="row">
                                                     <div class="col-md-6" style="padding:20px;">
                                                         Category: @Html.DisplayFor(modelItem => item.item_category)<br />
@@ -58,9 +58,6 @@
                                                         }
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
 
                                         </td>

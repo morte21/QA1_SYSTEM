@@ -24,6 +24,41 @@ namespace QA1_SYSTEM.Controllers
             consumableViewModel = _context.Consumables
                 .OrderByDescending(x => x.ConsumbleId) // Assuming 'id' is the ID field
                 .ToList();
+
+            // Add the counts to ViewData for access in the View
+            ViewData["STOCKS"] = consumableViewModel.Count;
+
+
+
+            return View(consumableViewModel);
+        }
+
+        public IActionResult IndexCritical()
+        {
+            List<Consumables> consumableViewModel;
+            consumableViewModel = _context.Consumables
+                .ToList() // Fetch all records from the database
+                .Where(y => int.Parse(y.consum_qty) < 5)
+                .OrderByDescending(x => x.item_description) // Assuming 'id' is the ID field
+                .ToList();
+
+            // Count the occurrences of each status
+            var statusCounts = _context.Consumables
+                .AsEnumerable() // Execute the query and bring results to memory
+                .Where(y => int.TryParse(y.consum_qty, out int qty) && qty < 5) // Filter data in memory
+                .GroupBy(x => x.item_description)
+                .Select(group => new
+                {
+                    Status = group.Key,
+                    Count = group.Count()
+                })
+                .ToList();
+
+            // Add the counts to ViewData for access in the View
+            ViewData["REQUEST"] = statusCounts.Count;
+
+
+
             return View(consumableViewModel);
         }
 
@@ -186,7 +221,44 @@ namespace QA1_SYSTEM.Controllers
 
         }
 
-        
+
+        [HttpGet]
+        public IActionResult EditCritical(int Id)
+        {
+            Consumables init = _context.Consumables
+                .Include(e => e.Requestor)
+                .Where(a => a.ConsumbleId == Id).FirstOrDefault();
+
+            return View(init);
+
+        }
+
+        [HttpPost]
+        public IActionResult EditCritical(Consumables consumables, IFormFile _pathPic)
+        {
+
+            if (_pathPic != null && _pathPic.Length > 0)
+            {
+                string uniqueFileNameIMG = $"{Guid.NewGuid()}-{"consumables"}-{_pathPic.FileName}";
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "consumables", uniqueFileNameIMG);
+
+                using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                {
+                    _pathPic.CopyTo(fileStream);
+                }
+
+                consumables.item_picture = uniqueFileNameIMG;
+            }
+            _context.Attach(consumables);
+            _context.Entry(consumables).State = EntityState.Modified;
+            _context.Entry(consumables).Property(f => f.item_picture).IsModified = _pathPic != null;
+            _context.SaveChanges();
+
+            return RedirectToAction("IndexCritical");
+
+        }
+
+
         [HttpGet]
         public IActionResult EditRequest(int Id)
         {

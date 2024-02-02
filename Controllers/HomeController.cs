@@ -24,7 +24,25 @@ namespace QA1_SYSTEM.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            DateTime currentDate = DateTime.Now;
+            int currentMonth = currentDate.Month;
+            var allPurchases = _context.Purchasing.ToList();
+
+            var viewModel = new Global
+            {
+                
+
+            consumables = _context.Consumables.ToList(),
+                purchasing = _context.Purchasing.OrderByDescending(x => x.date_received).ToList(),
+                totalComputersCount = _context.Computers.Count(),
+                totalEqpCount = _context.EquipmentMachine.Count(),
+
+                totalArrivalCount = _context.Purchasing.Where(x => x.request_status.Contains("ARRIVAL")).Count(),
+                totalApprovalCount = _context.Purchasing.Where(x => x.request_status.Contains("APPROVAL")).Count(),
+
+                // Filter records in-memory based on the month
+                totalReceivedCount = allPurchases.Where(p => !string.IsNullOrEmpty(p.date_received) && DateTime.TryParse(p.date_received, out var parsedDate) && parsedDate.Month == currentMonth).Count(),};
+            return View(viewModel);
         }
 
         public IActionResult Consumables()
@@ -32,14 +50,7 @@ namespace QA1_SYSTEM.Controllers
             var viewModel = new Global
             {
                 consumables = _context.Consumables.ToList(),
-                //computerHistory = _context.ComputerHistory.ToList(),
-                //computers = _context.Computers.ToList(),
-                //equipmentMachine = _context.EquipmentMachine.ToList(),
-                //equipmentMachineHistory = _context.EquipmentMachineHistory.ToList(),
-                //fixedAssetEQP = _context.FixedAssetEQP.ToList(),
-                //fixedAssetPC = _context.FixedAssetPC.ToList(),
-                //itemRequest = _context.ItemRequest.ToList(),
-                //requestor = _context.Requestor.ToList(),
+                purchasing = _context.Purchasing.OrderByDescending(x => x.date_received).ToList(),
             };
             return View(viewModel);
         }
@@ -65,3 +76,4 @@ namespace QA1_SYSTEM.Controllers
         }
     }
 }
+

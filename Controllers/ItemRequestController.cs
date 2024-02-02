@@ -350,8 +350,8 @@ namespace QA1_SYSTEM.Controllers
                 .Where(a => a.id == Id).FirstOrDefault();
 
             return View(itemRequest);
-
         }
+
 
         [HttpPost]
         public IActionResult Edit(ItemRequest itemRequest)

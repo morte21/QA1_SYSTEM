@@ -28,10 +28,10 @@ namespace QA1_SYSTEM.Models
         public string? os_installed { get; set; } = "";
 
         [DisplayName("IP-SDP")]
-        public string? ip_sdp { get; set; } = "";
+        public string? ip { get; set; } = "";
 
-        [DisplayName("IP-Local")]
-        public string? ip_local { get; set; } = "";
+        [DisplayName("MAC Address")]
+        public string? macAddress { get; set; } = "";
 
         [DisplayName("Active User")]
         public string? active_user { get; set; } = "";

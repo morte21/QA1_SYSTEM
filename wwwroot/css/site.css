@@ -428,3 +428,25 @@ divG:after {
     }
 }
 /* END EFFECT HOME PAGE*/
+
+
+.centermo {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+.itimanmo {
+    color:black;
+}
+
+.walangborder {
+    border: none;
+    border-radius: 20px;
+}
+
+.walangborder:hover {
+    color: none;
+    background-color: transparent !important;
+    border-color: none;
+}
