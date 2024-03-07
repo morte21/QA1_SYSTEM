@@ -1,73 +1,74 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using QA1_SYSTEM.Data;
-using QA1_SYSTEM.Models;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Net;
-using System.Runtime.Intrinsics.Arm;
-using Microsoft.AspNetCore.Authorization;
-using QA1_SYSTEM.Migrations;
-using DocumentFormat.OpenXml.Office2010.Excel;
 
-namespace QA1_SYSTEM.Controllers
+namespace QA1_SYSTEM.Models
 {
-    [Authorize]
-    public class ItemRequestController : Controller
+    public class EmailService
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly EmailService _emailService;
-
-        public ItemRequestController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, EmailService emailService)
+        public void SendPurchaseRequestNotification(string EmailCC1, string EmailCC2, string EmailCC3, string EmailCC4, string Emailrecipient, string emailSubject, string emailTitle, string message1, string message2)
         {
-            _context = context;
-            _webHostEnvironment = webHostEnvironment;
-            _emailService = emailService;
+            string HTML = GetEmailHtmlTemplate();
+
+            string yearNow = DateTime.UtcNow.Year.ToString();
+            string title = emailTitle;
+            string mensahe1 = message1;
+            string mensahe2 = message2;
+
+            HTML = HTML.Replace("{yearNow}", yearNow)
+                    .Replace("{mensahe1}", mensahe1)
+                    .Replace("{mensahe2}", mensahe2)
+                    .Replace("{title}", title);
+
+            MailMessage message = new MailMessage();
+            message.Subject = emailSubject;
+            message.IsBodyHtml = true;
+            message.From = new MailAddress("sdp.system@outlook.ph", "QA1 System Automatic Notification");
+            message.Priority = MailPriority.High;
+            message.Body = HTML;
+
+            // Add recipient
+            if (!string.IsNullOrWhiteSpace(Emailrecipient))
+            {
+                message.To.Add(new MailAddress(Emailrecipient));
+            }
+
+            // Add CC recipients
+            if (!string.IsNullOrWhiteSpace(EmailCC1))
+            {
+                message.CC.Add(new MailAddress(EmailCC1));
+            }
+            if (!string.IsNullOrWhiteSpace(EmailCC2))
+            {
+                message.CC.Add(new MailAddress(EmailCC2));
+            }
+            if (!string.IsNullOrWhiteSpace(EmailCC3))
+            {
+                message.CC.Add(new MailAddress(EmailCC3));
+            }
+            if (!string.IsNullOrWhiteSpace(EmailCC4))
+            {
+                message.CC.Add(new MailAddress(EmailCC4));
+            }
+
+            SmtpClient emailClient = new SmtpClient();
+            emailClient.Host = "smtp-mail.outlook.com";
+            emailClient.UseDefaultCredentials = false;
+            emailClient.EnableSsl = true;
+            emailClient.Credentials = new NetworkCredential("sdp.system@outlook.ph", "qasysdev01*");
+            emailClient.Port = 25;
+            emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            emailClient.Send(message);
         }
-        public IActionResult Index()
+
+        
+
+        private string GetEmailHtmlTemplate()
         {
-            
-            List<ItemRequest> itemRequest;
-            itemRequest = _context.ItemRequest
-                .OrderByDescending(x => x.id) // Assuming 'id' is the ID field
-                .Take(0)
-                .ToList();
-            return View(itemRequest);
-        }
+            // You can read your HTML template from a file or another source
+            // and return it as a string.
+            // Example: File.ReadAllText("path/to/email-template.html");
 
-
-
-        public IActionResult ItemReqLoadData()
-        {
-            var draw = Request.Form["draw"].FirstOrDefault();
-            int start = int.Parse(Request.Form["start"].FirstOrDefault());
-            int length = int.Parse(Request.Form["length"].FirstOrDefault());
-
-            // Query the database based on start, length, filters, etc.
-            var query = _context.ItemRequest.ToList();
-
-            var data = query.Skip(start).Take(length).ToList();
-            var totalCount = query.Count();
-
-            return Json(new { draw = draw, recordsFiltered = totalCount, recordsTotal = totalCount, data = data });
-        }
-
-        [Authorize]
-        [HttpGet]
-        public IActionResult Create()
-        {
-            ItemRequest itemRequest = new ItemRequest();
-            return View(itemRequest);
-        }
-
-        [HttpPost]
-        public IActionResult Create(ItemRequest itemRequest)
-        {
-            _context.Add(itemRequest);
-            _context.SaveChanges();
-
-            string HTML = @"<!DOCTYPE html>
+            return @"<!DOCTYPE html>
             <html>
                     <head>
                     <title></title>
@@ -202,7 +203,7 @@ namespace QA1_SYSTEM.Controllers
                     <table border=""0"" cellpadding=""0"" cellspacing=""0"" class=""heading_block block-3"" role=""presentation"" style=""mso-table-lspace: 0pt; mso-table-rspace: 0pt;"" width=""100%"">
                     <tr>
                     <td class=""pad"" style=""padding-bottom:20px;padding-top:10px;text-align:center;width:100%;"">
-                    <h1 style=""margin: 0; color: #000000; direction: ltr; font-family: 'Playfair Display', Georgia, serif; font-size: 30px; font-weight: normal; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;"">Purchase Request Notification</h1>
+                    <h1 style=""margin: 0; color: #000000; direction: ltr; font-family: 'Playfair Display', Georgia, serif; font-size: 30px; font-weight: normal; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;"">{title}</h1>
                     </td>
                     </tr>
                     </table>
@@ -212,8 +213,8 @@ namespace QA1_SYSTEM.Controllers
                     <div style=""font-family: sans-serif"">
                     <div class="""" style=""font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #000000; line-height: 1.5;"">
 
-                    <p style=""margin: 0; font-size: 12px; text-align: left; mso-line-height-alt: 21px;""> <b>{requestor}</b> has requested to purchase <b>{description}</b>, citing the reason as: <b>{reason}</b>.</p>
-                    <p style=""margin: 0; font-size: 14px; text-align: left; mso-line-height-alt: 18px;""> </p>
+                    <p style=""margin: 0; font-size: 12px; text-align: left; mso-line-height-alt: 21px;""> {mensahe1} </p>
+                    <p style=""margin: 0; font-size: 12px; text-align: left; mso-line-height-alt: 21px;""> {mensahe2} </p>
                     </div>
                     </div>
                     </td>
@@ -295,150 +296,9 @@ namespace QA1_SYSTEM.Controllers
                     </table>
 
                     </body>
-                    </html>
-
-            ";
-            string requestor = itemRequest.requestor.ToUpper().ToString();
-            string description = itemRequest.description.ToUpper().ToString();
-            string reason = itemRequest.reason.ToUpper().ToString();
-            string yearNow = DateTime.UtcNow.Year.ToString();
-
-            HTML = HTML.Replace("{requestor}", requestor)
-                      .Replace("{description}", description)
-                       .Replace("{reason}", reason)
-                       .Replace("{yearNow}", yearNow);
-
-            MailMessage message = new MailMessage();
-            message.Subject = "QA1 Purchase Request Notification";
-            message.IsBodyHtml = true;
-            message.From = (new MailAddress("sdp.system@outlook.ph", "QA1 System Automatic Notification"));
-            message.Priority = MailPriority.High;
-            message.Body = HTML;
-
-
-            //get user email
-            //string userName = _userManager.GetUserName(User);
-
-            //To
-            //message.To.Add(new MailAddress(userName));
-            message.To.Add(new MailAddress("sdp-qa1systemdevt@sanyodenki.com"));
-
-
-            //CC
-            //message.CC.Add(new MailAddress("orestes.ponce@sanyodenki.com"));
-            //message.CC.Add(new MailAddress("edmon.isip@sanyodenki.com"));
-            message.CC.Add(new MailAddress("faus.murillo@sanyodenki.com"));
-            message.CC.Add(new MailAddress("jason.casupanan@sanyodenki.com"));
-
-
-
-
-            SmtpClient emailClient = new SmtpClient();
-            emailClient.Host = "smtp-mail.outlook.com";
-            emailClient.UseDefaultCredentials = false;
-            emailClient.EnableSsl = true;
-            emailClient.Credentials = new NetworkCredential("sdp.system@outlook.ph", "qasysdev01*");
-            emailClient.Port = 25;
-            emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            emailClient.Send(message);
-
-
-            return RedirectToAction("Index");
+                    </html>";
         }
-
-        [Authorize(Roles = "Administrator, Moderator")]
-        [HttpGet]
-        public IActionResult Edit(int Id)
-        {
-            ItemRequest itemRequest = _context.ItemRequest
-                .Where(a => a.id == Id).FirstOrDefault();
-
-            return View(itemRequest);
-        }
-
-
-        [HttpPost]
-        public IActionResult Edit(ItemRequest itemRequest)
-        {
-            _context.Attach(itemRequest);
-            _context.Entry(itemRequest).State = EntityState.Modified;
-
-            _context.SaveChanges();
-
-            return RedirectToAction("Index");
-
-        }
-
-
-        [HttpGet]
-        public IActionResult EditGet(int id)
-        {
-            var item = _context.ItemRequest.FirstOrDefault(p => p.id == id);
-
-            if (item == null)
-            {
-                // Handle when item with the given ID is not found
-                return NotFound(); // Return a 404 Not Found response or some error handling
-            }
-            return PartialView("~/Views/ItemRequest/Edit.cshtml", item);
-        }
-
-        [HttpGet]
-        public IActionResult DetailsGet(int id)
-        {
-            var item = _context.ItemRequest.FirstOrDefault(p => p.id == id);
-
-            if (item == null)
-            {
-                // Handle when item with the given ID is not found
-                return NotFound(); // Return a 404 Not Found response or some error handling
-            }
-            return PartialView("~/Views/ItemRequest/Details.cshtml", item);
-        }
-
-
-
-        [HttpGet]
-        public IActionResult Details(int Id)
-        {
-            ItemRequest itemRequest = _context.ItemRequest
-                .Where(a => a.id == Id)
-                .FirstOrDefault();
-
-            return View(itemRequest);
-        }
-
-
-        [HttpPost]
-        public IActionResult SendEmail(int Id)
-        {
-            var itemRequest = _context.ItemRequest.FirstOrDefault(p => p.id == Id);
-            string Emailrecipient = itemRequest.requestor.ToString();
-            string emailSubject = "Purchase Request Update";
-            string emailTitle = emailSubject;
-            string requestItem = itemRequest.description.ToString();
-            string message0 = "Your purchase request " + requestItem;
-            string message1 = message0 + " is on hand and available right now.";
-            string message2 = "Please pick up the things you requested at the QA1-IC ORT/SysDev area.";
-            string EmailCC1 = "jason.casupanan@sanyodenki.com";
-            string EmailCC2 = "faus.murillo@sanyodenki.com";
-            string EmailCC3 = "sdp-qa1systemdevt@sanyodenki.com";
-            string EmailCC4 = "";
-
-            _emailService.SendPurchaseRequestNotification(EmailCC1, EmailCC2, EmailCC3, EmailCC4, Emailrecipient, emailSubject, emailTitle, message1, message2);
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public IActionResult Notif(int Id)
-        {
-            ItemRequest itemRequest = _context.ItemRequest
-                .Where(a => a.id == Id)
-                .FirstOrDefault();
-
-            return View(itemRequest);
-        }
-
-
     }
 }
+
+

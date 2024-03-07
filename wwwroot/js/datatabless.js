@@ -103,7 +103,13 @@ $(function () {
             { data: 'request_status' },
             { data: 'purchase_order' },
 
-            { data: 'date_request' },
+            {
+                data: 'date_request',
+                render: function (data, type, row) {
+                    // Assuming 'data' is a date string in a specific format
+                    return moment(data).format('MM/DD/YYYY'); // Format using moment.js
+                }
+            },
             { data: 'purchase_dept' },
             { data: 'category' },
             { data: 'part_number' },
@@ -297,7 +303,8 @@ $(function () {
                     return `
                 <td>
                     &nbsp;&nbsp;<a href="/ItemRequest/Edit/${row.id}">Edit</a> |
-                    &nbsp;&nbsp;<a href="/ItemRequest/Details/${row.id}">Details</a>
+                    &nbsp;&nbsp;<a href="/ItemRequest/Details/${row.id}">Details</a> |
+                    &nbsp;&nbsp;<a href="/ItemRequest/Notif/${row.id}">Send Notification</a>
                     </td>`;
                 }
             },

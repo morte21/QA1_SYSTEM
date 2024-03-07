@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using QA1_SYSTEM.Data;
+using QA1_SYSTEM.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+builder.Services.AddScoped<EmailService>();
 
 var app = builder.Build();
 
@@ -34,6 +35,7 @@ if (!app.Environment.IsDevelopment())
 //((FileExtensionContentTypeProvider)options.ContentTypeProvider).Mappings.Add(new KeyValuePair<string, string>(".glb", "model/gltf-buffer"));
 //app.UseStaticFiles(options);
 //3d
+
 
 
 app.UseHttpsRedirection();

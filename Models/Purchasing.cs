@@ -11,6 +11,7 @@ namespace QA1_SYSTEM.Models
 
         [Required]
         [DisplayName("Request Date")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = false)]
         public DateTime? date_request { get; set; }
 

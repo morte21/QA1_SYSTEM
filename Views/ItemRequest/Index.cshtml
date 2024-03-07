@@ -33,7 +33,8 @@
                     <tr>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.id" >Update</a> |
-                            <a asp-action="Details" asp-route-id="@item.id" data-bs-toggle="modal" data-bs-target="#editmodal" onclick="loadDetailsModalItemRequest(@item.id)">Details</a>
+                            <a asp-action="Details" asp-route-id="@item.id" data-bs-toggle="modal" data-bs-target="#editmodal" onclick="loadDetailsModalItemRequest(@item.id)">Details</a> |
+                            <a asp-action="Notif" asp-route-id="@item.id">Send Notification</a>
                         </td>
                         <td>@Html.DisplayFor(modelItem => item.status)</td>
                         <td>@Html.DisplayFor(modelItem => item.req_date)</td>

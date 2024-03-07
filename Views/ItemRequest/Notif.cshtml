@@ -1,0 +1,20 @@
+﻿@model QA1_SYSTEM.Models.ItemRequest
+
+@{
+    ViewData["Title"] = "Notif";
+}
+
+<h1>Send purchase status to requestor</h1>
+
+<div>
+    <form method="post" action="@Url.Action("SendEmail", "ItemRequest")" id="emailForm" style="margin-top:25px;">
+        <div class="container">
+        </div>
+        <input type="hidden" name="Id" value="@Model.id" />
+        <button type="submit" class="btn btn-primary" id="sendEmailBtn">Send Notification</button>
+    </form>
+
+    <div style="padding-top:30px;">
+        <a asp-action="Index">Back to Main Menu</a>
+    </div>
+</div>
